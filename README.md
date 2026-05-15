@@ -1,0 +1,4 @@
+# Redesign de Acessibilidade: Consórcio 123
+Este repositório contém o projeto desenvolvido na unidade curricular de **Interação Humano-Computador e Experiência do Usuário**.
+
+O objetivo do projeto é analisar o sistema atual do Consórcio 123 (responsável pelo sistema de bilhetagem eletrônica e cadastro de passe estudantil de São José dos Campos) e propor um redesign com foco em **acessibilidade para pessoas com deficiência visual**.
