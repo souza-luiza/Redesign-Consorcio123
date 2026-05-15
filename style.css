@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background-color: #6ea0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#container {
+    background-color: #f0f8ff;
+    max-width: 1000px;
+    padding: 20px;
+    margin: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.tab-btn {
+    width: 100%;
+    border: none;
+    color: #020617;
+    background-color: #f0f8ff;
+    border-radius: 8px 8px 0px 0px;
+    font-weight: 500;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.tab-btn.active {
+    background-color: #c7d2fe;
+}
+
+.tab-btn:hover {
+    background-color: #a5b4fc;
+}
+
+.content {
+    display: none;
+}
+
+.content.show {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background-color: #c7d2fe;
+    border-radius: 0px 0px 8px 8px;
+    padding: 16px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+.content-img {
+    width: 100%;
+}
+
+.button-prototype {
+    background-color: rgb(150, 116, 241);
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button-prototype:hover {
+    box-shadow: #a83ffe 0px 0px 8px;
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+.members { color:var(--muted); font-size:14px; margin-bottom: 6px; }

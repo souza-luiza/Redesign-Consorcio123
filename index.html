@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>123 EduAcessível</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="container">
+        <header>
+            <h1>Redesign de Acessibilidade: Consórcio 123</h1>
+            <div class="members">
+                <strong>Membros:</strong>
+                Felipe Calderaro,
+                Isabella Ribeiro,
+                João Vitor Evangelista,
+                Luiza de Souza,
+                Vitor Alves.<br>
+                <strong>Unidade Curricular:</strong> Interface Humano-Computador.
+            </div>
+        </header>
+
+        <div class="tab-buttons">
+            <button class="tab-btn active" content-id="user-research">
+                User Research
+            </button>
+
+            <button class="tab-btn" content-id="baixa-fidelidade">
+                Protótipo de Baixa Fidelidade
+            </button>
+        </div>
+
+        <div class="tab-contents">
+            <div class="content show" id="user-research">
+
+                <h2>Contexto do Projeto</h2>
+                <p>O Consórcio 123 é a empresa responsável por gerenciar o Sistema de Bilhetagem Eletrônica do transporte público de São José dos Campos, assim como a responsável pelo sistema de cadastro de estudantes para o passe estudantil municipal.</p>
+                <p>Atualmente, esse cadastro é feito em um site que não apresenta acessibilidade para usuários com deficiência visual, impossibilitando o seu uso de forma autônoma.</p>
+                <p>Diante desse contexto, o projeto tem como objetivo analisar o sistema atual e propor um redesign focado em acessibilidade para usuários com deficiência visual, permitindo que esses usuários consigam realizar o cadastro de forma independente, sem o auxílio de terceiros ou o comparecimento presencial.</p>
+
+                <h2>Metodologia</h2>
+
+                <p>
+                    Devido à dificuldade inicial de recrutamento e acesso direto a usuários
+                    com deficiência visual para entrevistas na fase de descoberta,
+                    a pesquisa de usuário foi estruturada a partir de uma triangulação
+                    de métodos investigativos indiretos.
+                </p>
+
+                <p>
+                    Para guiar essa investigação, adaptou-se os métodos dos cartões da IDEO
+                    (Look, Ask, Learn e Try), concentrando os esforços nas três frentes:
+                </p>
+
+                
+                <p><strong>Learn:</strong> análise de artigos científicos e diretrizes WCAG.</p>
+                <p><strong>Look:</strong> observação indireta através de vídeos e registros de navegação.</p>
+                <p><strong>Try:</strong> uso de leitores de tela para testar o sistema do Consórcio 123.</p>
+
+                <h2>Pesquisa Secundária</h2>
+
+                <p>Uma pesquisa secundária foi feita com a revisão de artigos científicos, análise de vídeos e registros digitais sobre acessibilidade para deficientes visuais, além de uma pesquisa de boas práticas e critérios técnicos de acessibilidade.</p>
+                <p>As principais dificuldades encontradas nos artigos e vídeos analisados foram:</p>
+                <ul>
+                    <li>Imagens sem descrição textual;</li>
+                    <li>Textos apresentados como imagens;</li>
+                    <li>Formulários sem navegação em sequência lógica;</li>
+                    <li>Vídeos sem descrição textual ou sonora;</li>
+                    <li>Ausência de teclas de atalho;</li>
+                    <li>Elementos intrusivos, como pop-ups.</li>
+                </ul>
+
+                <h2>Análise do Sistema Atual</h2>
+
+                <p>    Foi realizada uma análise do fluxo de acesso do site, além da identificação de potenciais erros e do uso de ferramentas de empatia para compreender parcialmente a experiência de pessoas com perda total ou parcial da visão.</p>
+
+                <p>Na imagem abaixo, é apresentado o fluxo atual do site do Consórcio 123, onde podem ser percebidos problemas de organização e navegação, como páginas desnecessárias, informações pouco intuitivas e caminhos confusos para acessar determinadas funcionalidades.</p>
+                <img src="imgs/fluxo-consorcio.jpeg" class="content-img" alt="Imagem do fluxo do site do Consórcio 123">
+
+                <p>Para complementar a análise, foi utilizado o software NVDA, um leitor de tela para computadores. Durante o experimento, dois alunos vendados tentaram realizar um cadastro no sistema, simulando parcialmente a experiência de uma pessoa com deficiência visual.</p>
+                
+                <p>Os principais problemas identificados foram:</p>
+                <ul>
+                    <li>
+                        <strong>Imagens sem descrição:</strong> O leitor de tela não informa o conteúdo das imagens presentes no site;
+                    </li>
+
+                    <li>
+                        <strong>Navegação desorganizada:</strong> O sistema “pula” elementos importantes durante a navegação pelo teclado;
+                    </li>
+
+                    <li>
+                        <strong>Campos sem identificação:</strong> Caixas de texto não possuem descrição adequada, dificultando o preenchimento;
+                    </li>
+
+                    <li>
+                        <strong>Textos ignorados:</strong> Alguns conteúdos não são lidos pelo leitor de tela durante a navegação com a tecla Tab.
+                    </li>
+                </ul>
+
+                <h2>Proto-Persona: Eduarda</h2>
+
+                <p><strong>Idade:</strong> 20 anos.</p>
+                <p><strong>Ocupação:</strong> Estudante universitária.</p>
+                <p><strong>Condição:</strong> Cegueira total.</p>
+                <p>Ela utiliza smartphone e computador com leitores de tela e navegação por teclado, busca autonomia para realizar o cadastro e recadastro do passe estudantil de forma remota, e precisa de um fluxo simples, lógico e acessível.</p>
+
+            </div>
+        </div>
+
+        <div class="tab-contents">
+            <div class="content" id="baixa-fidelidade">
+                <h2>Brainstorming</h2>
+                <p>Uma reunião de Brainstorming foi realizada com o objetivo de identificar os principais problemas de navegação e acessibilidade do site do Consórcio 123.</p>
+                <p>Durante a reunião, cada página do sistema foi analisada individualmente, tanto no modo sem alto contraste quanto utilizando alto contraste. Uma das páginas analisadas pode ser observada na imagem abaixo.</p>
+                <img src="imgs/paginas-sem-e-com-alto-constraste.png" class="content-img" alt="Imagens do site do Consórcio 123 sem e com alto contraste">
+                <p>A equipe também analisou o fluxo atual do site, identificando páginas desnecessárias, etapas redundantes e funcionalidades que poderiam ser reorganizadas ou unificadas para tornar a experiência mais simples e intuitiva.</p>
+                <img src="imgs/fluxo-analisado.png" class="content-img" alt="Fluxo do site do Consórcio 123 com anotações.">
+                <p>Com base nessas observações, foi desenvolvido um fluxo novo desejado, buscando reduzir a quantidade de etapas para cadastro e recadastro, além de melhorar a navegação para usuários com deficiência visual. Esse fluxo novo pode ser observado na imagem abaixo.</p>
+                <img src="imgs/fluxo-novo.png" class="content-img" alt="Fluxo novo do site do Consórcio 123 desenvolvido pela equipe.">
+                
+                <h2>Protótipo de Baixa Fidelidade</h2>
+                <p>Após a definição dessas melhorias, foi desenvolvido um protótipo de baixa fidelidade utilizando a ferramenta Figma. O protótipo foi criado com versões em modo padrão e em alto contraste, permitindo avaliar diferentes possibilidades de acessibilidade visual durante a navegação. Todas as páginas do protótipo de baixa fidelidade podem ser observadas na imagem abaixo.</p>
+                <img src="imgs/paginas-figma.png" class="content-img" alt="Páginas do protótipo de baixa fidelidade no Figma.">
+                <p>O protótipo de baixa fidelidade interativo pode ser acessado pelo botão abaixo.</p>
+                <a href="https://www.figma.com/proto/RJXmYucgdXLDKJbRzJ36ST/Consorcio123?node-id=0-1&t=OsT9ZsJUjqSkYiOl-1" target="_blank" class="button-prototype">Protótipo no Figma</a>
+            </div>
+        </div>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
