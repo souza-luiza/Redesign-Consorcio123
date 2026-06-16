@@ -1,11 +1,20 @@
+"use client";
+
+import BarraAcessibilidade from "@/components/BarraAcessibilidade";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import Image from "next/image";
-import { useTheme } from "@/contexts/ThemeContext";
 
-export default function HomeClient() {
-  
-  const { highContrast } = useTheme();
+interface HomeClientProps {
+  isHighContrast?: boolean;
+  toggleHighContrast?: () => void;
+}
 
+export default function HomeClient({ isHighContrast, toggleHighContrast }: HomeClientProps) {
   return (
+  <>
+    <BarraAcessibilidade isHighContrast={isHighContrast} toggleHighContrast={toggleHighContrast} />
+    <Header />
     <main className="w-full min-h-screen bg-white flex flex-col justify-start items-center overflow-x-hidden font-['Space_Grotesk']">
       {/* Seção Hero */}
       <section className="w-full flex-1 max-w-[1200px] px-8 py-20 flex justify-between items-center gap-12">
@@ -67,5 +76,7 @@ export default function HomeClient() {
         </article>
       </section>
     </main>
+    <Footer />
+  </>
   );
 }
