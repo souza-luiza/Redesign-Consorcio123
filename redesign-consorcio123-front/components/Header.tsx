@@ -13,12 +13,13 @@ export default function Header({ highContrast }: HeaderProps) {
     >
       <Link
         href="/"
-        className="flex items-center gap-4 rounded-md"
+        className={`flex items-center gap-4 rounded-md
+        ${highContrast ? "focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]" : "focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"}`}
       >
         <Image
           src={
             highContrast
-              ? "/bus-front-contraste.png"
+              ? "/bus-front-contraste.svg"
               : "/bus-front.png"
           }
           alt="Logo do Consórcio 123 em formato de ônibus"

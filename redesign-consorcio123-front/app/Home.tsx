@@ -6,14 +6,49 @@ import Header from "@/components/Header";
 import Image from "next/image";
 
 export default function HomeClient() {
+
   const [highContrast, setHighContrast] = useState(false);
 
   const toggleContrast = () => {
     setHighContrast((prev) => !prev);
   };
 
+  const irParaMenu = () => {
+    const criarConta = document.getElementById("menu");
+
+    if (criarConta) {
+      criarConta.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+
+      (criarConta as HTMLElement).focus();
+    }
+  };
+
+  const irParaConteudo = () => {
+    const conteudo = document.getElementById("main-content");
+
+    if (conteudo) {
+      conteudo.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      conteudo.focus();
+    }
+  };
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "1") {
+        irParaConteudo();
+      }
+
+      if (event.key === "2") {
+        irParaMenu();
+      }
+
       if (event.key === "3") {
         toggleContrast();
       }
@@ -30,14 +65,15 @@ export default function HomeClient() {
     <>
       <nav
         className={`w-full px-12 py-2.5 flex justify-start items-center gap-6
-        ${highContrast ? "bg-[#1e1e1e]" : "bg-[#e2e3e6]"}`}
+        ${highContrast ? "bg-[#212121]" : "bg-[#e2e3e6]"}`}
       >
         <button
+          onClick={irParaConteudo}
           className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
           ${
             highContrast
-              ? "text-white hover:bg-white hover:text-black"
-              : "text-black hover:bg-[#100b4f] hover:text-white"
+              ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
+              : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
           }`}
         >
           <strong
@@ -50,11 +86,12 @@ export default function HomeClient() {
         </button>
 
         <button
+          onClick={irParaMenu}
           className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
           ${
             highContrast
-              ? "text-white hover:bg-white hover:text-black"
-              : "text-black hover:bg-[#100b4f] hover:text-white"
+              ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
+              : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
           }`}
         >
           <strong
@@ -71,8 +108,8 @@ export default function HomeClient() {
           className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
           ${
             highContrast
-              ? "text-white hover:bg-white hover:text-black"
-              : "text-black hover:bg-[#100b4f] hover:text-white"
+              ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
+              : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
           }`}
         >
           <strong
@@ -90,8 +127,9 @@ export default function HomeClient() {
       <Header highContrast={highContrast} />
 
       <main
+        id="main-content"
         className={`w-full min-h-screen flex flex-col justify-start items-center overflow-x-hidden font-['Space_Grotesk']
-        ${highContrast ? "bg-[#1e1e1e]" : "bg-white"}`}
+        ${highContrast ? "bg-[#212121]" : "bg-white"}`}
       >
         <section className="w-full flex-1 max-w-[1200px] px-8 py-20 flex justify-between items-center gap-12">
           <article className="w-full max-w-md flex flex-col items-start gap-8">
@@ -112,11 +150,12 @@ export default function HomeClient() {
 
             <nav className="flex justify-start items-center gap-6">
               <button
+                id="menu"
                 className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
                 ${
                   highContrast
-                    ? "border border-white text-white hover:bg-white hover:text-black"
-                    : "bg-[#fac16d] text-black hover:bg-[#100b4f] hover:text-white"
+                    ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
+                    : "bg-[#fac16d] text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
                 }`}
               >
                 Criar conta
@@ -126,8 +165,8 @@ export default function HomeClient() {
                 className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
                 ${
                   highContrast
-                    ? "border border-white text-white hover:bg-white hover:text-black"
-                    : "bg-[#fac16d] text-black hover:bg-[#100b4f] hover:text-white"
+                    ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
+                    : "bg-[#fac16d] text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
                 }`}
               >
                 Acessar conta
@@ -154,25 +193,25 @@ export default function HomeClient() {
           {[
             {
               img: "/card-home.png",
-              imgContrast: "/card-home-contraste.png",
+              imgContrast: "/card-home-contraste.svg",
               title: "1. Faça o seu cadastro",
               text: "Crie sua conta com CPF e dados escolares.",
             },
             {
               img: "/documento-home.png",
-              imgContrast: "/documento-home-contraste.png",
+              imgContrast: "/documento-home-contraste.svg",
               title: "2. Envie os documentos",
               text: "Anexe RG, comprovante e declaração escolar.",
             },
             {
               img: "/relogio-home.png",
-              imgContrast: "/relogio-home-contraste.png",
+              imgContrast: "/relogio-home-contraste.svg",
               title: "3. Aguarde a análise",
               text: "Acompanhe o status do seu pedido diretamente pelo sistema.",
             },
             {
               img: "/onibus-home.png",
-              imgContrast: "/onibus-home-contraste.png",
+              imgContrast: "/onibus-home-contraste.svg",
               title: "4. Receba seu passe",
               text: "Após a aprovação, retire e utilize seu benefício.",
             },
