@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function CadastroForms() {
 
@@ -163,8 +162,8 @@ export default function CadastroForms() {
                 Criar conta
               </button>
 
-              <Link href="/login">
                 <button
+                  onClick={() => (window.location.href = "login")}
                   className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
                   ${
                     highContrast
@@ -174,7 +173,6 @@ export default function CadastroForms() {
               >
                 Acessar conta
               </button>
-              </Link>
             </nav>
           </article>
 
