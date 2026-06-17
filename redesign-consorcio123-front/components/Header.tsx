@@ -52,25 +52,13 @@ export default function Header({
 
       {showAccountActions && (
         <nav aria-label="Ações da conta" className="flex items-center gap-4">
-          <Link
-            href="/"
-            className={`h-12 px-5 py-2.5 rounded-[10px] flex justify-center items-center text-lg font-medium transition-colors outline-none
-            ${
-              highContrast
-                ? "border-2 border-white text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
-                : "border-2 border-white text-white hover:bg-white hover:text-[#100b4f] focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
-            }`}
-          >
-            Voltar para o início
-          </Link>
-
           <button
             type="button"
             onClick={handleSair}
             className={`h-12 px-5 py-2.5 rounded-[10px] flex justify-center items-center text-lg font-medium transition-colors outline-none
             ${
               highContrast
-                ? "bg-white text-black hover:bg-[#fac16d] focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-white"
+                ? "border-2 border-white text-white hover:bg-[#f69c0a] hover:border-none hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-none"
                 : "bg-[#fac16d] text-black hover:bg-[#f69c0a] focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-white"
             }`}
           >
