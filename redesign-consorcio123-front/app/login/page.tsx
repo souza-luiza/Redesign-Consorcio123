@@ -1,0 +1,232 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+
+export default function Login() {
+  const [highContrast, setHighContrast] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleContrast = () => {
+    setHighContrast((prev) => !prev);
+  };
+
+  const irParaMenu = () => {
+    const criarConta = document.getElementById("menu");
+
+    if (criarConta) {
+      criarConta.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+
+      (criarConta as HTMLElement).focus();
+    }
+  };
+
+  const irParaConteudo = () => {
+    const conteudo = document.getElementById("main-content");
+
+    if (conteudo) {
+      conteudo.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      conteudo.focus();
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "1") {
+        irParaConteudo();
+      }
+
+      if (event.key === "2") {
+        irParaMenu();
+      }
+
+      if (event.key === "3") {
+        toggleContrast();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  return (
+    <div className={`min-h-screen flex flex-col ${highContrast ? "bg-[#212121]" : "bg-white"}`}>
+      <nav
+        className={`w-full px-12 py-2.5 flex justify-start items-center gap-6
+        ${highContrast ? "bg-[#212121]" : "bg-[#e2e3e6]"}`}
+      >
+        <button
+          onClick={irParaConteudo}
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          ${
+            highContrast
+              ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
+              : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
+          }`}
+        >
+          <strong
+            className={`w-6 h-6 rounded flex items-center justify-center text-sm font-bold
+            ${highContrast ? "bg-white text-black" : "bg-[#fac16d] text-black"}`}
+          >
+            1
+          </strong>
+          <span className="text-sm font-medium">Ir para o conteúdo</span>
+        </button>
+
+        <button
+          onClick={irParaMenu}
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          ${
+            highContrast
+              ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
+              : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
+          }`}
+        >
+          <strong
+            className={`w-6 h-6 rounded flex items-center justify-center text-sm font-bold
+            ${highContrast ? "bg-white text-black" : "bg-[#fac16d] text-black"}`}
+          >
+            2
+          </strong>
+          <span className="text-sm font-medium">Ir para o menu</span>
+        </button>
+
+        <button
+          onClick={toggleContrast}
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          ${
+            highContrast
+              ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
+              : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
+          }`}
+        >
+          <strong
+            className={`w-6 h-6 rounded flex items-center justify-center text-sm font-bold
+            ${highContrast ? "bg-white text-black" : "bg-[#fac16d] text-black"}`}
+          >
+            3
+          </strong>
+          <span className="text-sm font-medium">
+            {highContrast ? "Desativar Alto Contraste" : "Ativar Alto Contraste"}
+          </span>
+        </button>
+      </nav>
+
+      <Header highContrast={highContrast} />
+
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-grow flex items-center justify-center py-12 px-4 outline-none"
+      >
+        <section
+          className={`w-full max-w-[440px] p-10 rounded-xl flex flex-col gap-8 shadow-sm ${
+            highContrast ? "bg-[#0a0a0a]" : "bg-[#100b4f]"
+          }`}
+        >
+          <h1 className="text-white text-center text-xl font-medium">
+            Acessar sua conta
+          </h1>
+
+          <form className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email" className="text-white text-sm font-medium">
+                E-mail
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="exemplo@email.com"
+                className={`w-full px-4 py-3 bg-white rounded-md text-sm text-black outline-none transition-shadow ${
+                  highContrast
+                    ? "focus:ring-4 focus:ring-[#fac16d]"
+                    : "focus:ring-4 focus:ring-[#e65100]"
+                }`}
+                required
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label htmlFor="password" className="text-white text-sm font-medium">
+                Senha
+              </label>
+              {/* Adicione a classe do seu projeto aqui no className do input para o olhinho aparecer */}
+               <div className="relative">
+                    <input type={showPassword ? "text" : "password"} id="password" placeholder="********" className={`w-full px-4 py-3 pr-12 bg-white rounded-md text-sm text-black outline-none transition-shadow ${
+                        highContrast
+                             ? "focus:ring-4 focus:ring-[#fac16d]"
+                             : "focus:ring-4 focus:ring-[#e65100]"
+                        }`}
+                    required
+                    />
+                    <button type="button"
+                        aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                        aria-pressed={showPassword}
+                        onClick={() => setShowPassword(!showPassword)}
+                        className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                            highContrast
+                            ? "text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
+                            : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
+                        }`} >
+                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                 </div>
+            </div>
+
+            <button
+              type="submit"
+              className={`mt-2 mx-auto px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                highContrast
+                  ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#fac16d] focus:text-black focus:border-[#fac16d]"
+                  : "bg-[#fac16d] text-black border border-transparent hover:bg-white focus:ring-4 focus:ring-[#e65100]"
+              }`}
+            >
+              Entrar na conta
+            </button>
+          </form>
+
+          <div className="flex flex-col items-center gap-6 mt-2">
+            <a
+              href="#"
+              className={`inline-block text-white font-bold text-xs outline-none rounded p-1 transition-all transform hover:scale-110 ${
+                highContrast
+                  ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-4"
+                  : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-4"
+              }`}
+            >
+              Esqueceu a senha?
+            </a>
+
+            <p className="text-white text-xs">
+              Não tem uma conta?{" "}
+              <a
+                href="#"
+                className={`inline-block font-bold outline-none rounded p-1 transition-all transform hover:scale-110 ${
+                  highContrast
+                    ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-4"
+                    : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-4"
+                }`}
+              >
+                Cadastre-se
+              </a>
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <Footer highContrast={highContrast} />
+    </div>
+  );
+}
