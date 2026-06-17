@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -8,9 +9,43 @@ import Header from "@/components/Header";
 export default function Login() {
   const [highContrast, setHighContrast] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  
+  // Estados para os inputs e validação
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  
+  const router = useRouter();
 
   const toggleContrast = () => {
     setHighContrast((prev) => !prev);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrorMsg(""); // Limpa o erro antes de validar novamente
+
+    // Validação de campos vazios
+    if (!email.trim() || !password.trim()) {
+      setErrorMsg("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    // Validação simples de formato de e-mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMsg("Por favor, insira um e-mail válido.");
+      return;
+    }
+
+    // Validação simples de tamanho de senha (exemplo: mínimo 6 caracteres)
+    if (password.length < 6) {
+      setErrorMsg("A senha deve ter pelo menos 6 caracteres.");
+      return;
+    }
+
+    // Se passar por todas as validações, redireciona
+    router.push("/perfil");
   };
 
   const irParaMenu = () => {
@@ -140,7 +175,19 @@ export default function Login() {
             Acessar sua conta
           </h1>
 
-          <form className="flex flex-col gap-6">
+          <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+            {/* Mensagem de Erro */}
+            {errorMsg && (
+              <div
+                className={`p-3 rounded-md text-sm font-medium text-center ${
+                  highContrast ? "bg-[#e65100] text-white" : "bg-[#e65100] text-white"
+                }`}
+                role="alert"
+              >
+                {errorMsg}
+              </div>
+            )}
+
             <div className="flex flex-col gap-2">
               <label htmlFor="email" className="text-white text-sm font-medium">
                 E-mail
@@ -148,6 +195,8 @@ export default function Login() {
               <input
                 type="email"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="exemplo@email.com"
                 className={`w-full px-4 py-3 bg-white rounded-md text-sm text-black outline-none transition-shadow ${
                   highContrast
@@ -162,27 +211,34 @@ export default function Login() {
               <label htmlFor="password" className="text-white text-sm font-medium">
                 Senha
               </label>
-              {/* Adicione a classe do seu projeto aqui no className do input para o olhinho aparecer */}
-               <div className="relative">
-                    <input type={showPassword ? "text" : "password"} id="password" placeholder="********" className={`w-full px-4 py-3 pr-12 bg-white rounded-md text-sm text-black outline-none transition-shadow ${
-                        highContrast
-                             ? "focus:ring-4 focus:ring-[#fac16d]"
-                             : "focus:ring-4 focus:ring-[#e65100]"
-                        }`}
-                    required
-                    />
-                    <button type="button"
-                        aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
-                        aria-pressed={showPassword}
-                        onClick={() => setShowPassword(!showPassword)}
-                        className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
-                            highContrast
-                            ? "text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
-                            : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
-                        }`} >
-                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                 </div>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="********"
+                  className={`w-full px-4 py-3 pr-12 bg-white rounded-md text-sm text-black outline-none transition-shadow ${
+                    highContrast
+                      ? "focus:ring-4 focus:ring-[#fac16d]"
+                      : "focus:ring-4 focus:ring-[#e65100]"
+                  }`}
+                  required
+                />
+                <button
+                  type="button"
+                  aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                  aria-pressed={showPassword}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                    highContrast
+                      ? "text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
+                      : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
+                  }`}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
 
             <button
@@ -190,7 +246,7 @@ export default function Login() {
               className={`mt-2 mx-auto px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
                 highContrast
                   ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#fac16d] focus:text-black focus:border-[#fac16d]"
-                  : "bg-[#fac16d] text-black border border-transparent hover:bg-white focus:ring-4 focus:ring-[#e65100]"
+                  : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
               }`}
             >
               Entrar na conta
@@ -212,7 +268,7 @@ export default function Login() {
             <p className="text-white text-xs">
               Não tem uma conta?{" "}
               <a
-                href="#"
+                href="/cadastro"
                 className={`inline-block font-bold outline-none rounded p-1 transition-all transform hover:scale-110 ${
                   highContrast
                     ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-4"
