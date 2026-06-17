@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { Eye, EyeOff } from "lucide-react";
+
 
 function ErrorMsg({ mensagem }: { mensagem?: string }) {
     if (!mensagem) return null;
@@ -40,6 +42,9 @@ export default function Cadastro() {
     const [aceiteTermos, setAceiteTermos] = useState(false);
 
     const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const [mostrarSenha, setMostrarSenha] = useState(false);
+    const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
 
     // ── Formatadores ──────────────────────────────────────────────────────────
     const formatarCPF = (valor: string) => {
@@ -496,39 +501,79 @@ export default function Cadastro() {
                     <ErrorMsg mensagem={errors.email} />
                     </div>
 
-                    {/* Senha — FIX 1: input controlado */}
                     <div className="flex flex-col gap-2">
                     <label htmlFor="senha" className="text-white text-lg font-medium">
                         Senha
                     </label>
-                    <input
-                        id="senha"
-                        type="password"
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
-                        placeholder="Senha"
-                        className={inputBase("senha")}
-                    />
+                    <div className="relative">
+                        <input
+                            id="senha"
+                            type={mostrarSenha ? "text" : "password"}
+                            value={senha}
+                            onChange={(e) => setSenha(e.target.value)}
+                            placeholder="Senha"
+                            className={`${inputBase("senha")} pr-12 w-full`}
+                        />
+
+                        <button
+                            type="button"
+                            aria-label={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}
+                            aria-pressed={mostrarSenha}
+                            onClick={() => setMostrarSenha(!mostrarSenha)}
+                            className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                                highContrast
+                                    ? "text-white focus:outline-dashed focus:outline-2 focus:outline-[#f69c0a]"
+                                    : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
+                            }`}
+                        >
+                            {mostrarSenha ? <EyeOff size={20} /> : <Eye size={20} />}
+                        </button>
+                    </div>
                     <ErrorMsg mensagem={errors.senha} />
                     </div>
 
-                    {/* Confirmar senha — FIX 1: input controlado */}
                     <div className="flex flex-col gap-2">
                     <label htmlFor="confirmarSenha" className="text-white text-lg font-medium">
                         Confirme a senha
                     </label>
-                    <input
-                        id="confirmarSenha"
-                        type="password"
-                        value={confirmarSenha}
-                        onChange={(e) => setConfirmarSenha(e.target.value)}
-                        placeholder="Confirme sua senha"
-                        className={inputBase("confirmarSenha")}
-                    />
+                    
+                    <div className="relative">
+                        <input
+                            id="confirmarSenha"
+                            type={mostrarConfirmarSenha ? "text" : "password"}
+                            value={confirmarSenha}
+                            onChange={(e) => setConfirmarSenha(e.target.value)}
+                            placeholder="Confirme sua senha"
+                            className={`${inputBase("confirmarSenha")} pr-12 w-full`}
+                        />
+
+                        <button
+                            type="button"
+                            aria-label={
+                                mostrarConfirmarSenha
+                                    ? "Ocultar confirmação de senha"
+                                    : "Mostrar confirmação de senha"
+                            }
+                            aria-pressed={mostrarConfirmarSenha}
+                            onClick={() =>
+                                setMostrarConfirmarSenha(!mostrarConfirmarSenha)
+                            }
+                            className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                                highContrast
+                                    ? "text-white focus:outline-dashed focus:outline-2 focus:outline-[#f69c0a]"
+                                    : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
+                            }`}
+                        >
+                            {mostrarConfirmarSenha ? (
+                                <EyeOff size={20} />
+                            ) : (
+                                <Eye size={20} />
+                            )}
+                        </button>
+                    </div>
                     <ErrorMsg mensagem={errors.confirmarSenha} />
                     </div>
 
-                    {/* FIX 4: handleProximoPasso valida e muda etapa; o useEffect cuida do foco */}
                     <button
                     type="button"
                     onClick={handleProximoPasso}
