@@ -49,15 +49,16 @@ export default function Login() {
   };
 
   const irParaMenu = () => {
-    const criarConta = document.getElementById("menu");
+    const menus = document.getElementById("email");
 
-    if (criarConta) {
-      criarConta.scrollIntoView({
+    if (menus) {
+      menus.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
-
-      (criarConta as HTMLElement).focus();
+      menus.textContent = ""; // Limpa o conteúdo do menu para evitar confusão
+      (menus as HTMLElement).focus();
+      
     }
   };
 
@@ -76,25 +77,22 @@ export default function Login() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "1") {
-        irParaConteudo();
-      }
+        const elementoAtivo = document.activeElement;
+        const estaDigitando =
+            elementoAtivo instanceof HTMLInputElement ||
+            elementoAtivo instanceof HTMLTextAreaElement ||
+            elementoAtivo instanceof HTMLSelectElement;
 
-      if (event.key === "2") {
-        irParaMenu();
-      }
+        if (estaDigitando) return;
 
-      if (event.key === "3") {
-        toggleContrast();
-      }
-    };
+        if (event.key === "1") irParaConteudo();
+        if (event.key === "2") irParaMenu();
+        if (event.key === "3") toggleContrast();
+        };
 
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
 
   return (
     <div className={`min-h-screen flex flex-col ${highContrast ? "bg-[#212121]" : "bg-white"}`}>
@@ -245,7 +243,7 @@ export default function Login() {
               type="submit"
               className={`mt-2 mx-auto px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
                 highContrast
-                  ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#fac16d] focus:text-black focus:border-[#fac16d]"
+                  ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                   : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
               }`}
             >
@@ -255,7 +253,7 @@ export default function Login() {
 
           <div className="flex flex-col items-center gap-6 mt-2">
             <a
-              href="#"
+              href="/recuperar-senha"
               className={`inline-block text-white font-bold text-xs outline-none rounded p-1 transition-all transform hover:scale-110 ${
                 highContrast
                   ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-4"
