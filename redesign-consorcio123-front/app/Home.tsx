@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Image from "next/image";
 
-export default function HomeClient() {
+export default function CadastroForms() {
 
   const [highContrast, setHighContrast] = useState(false);
 
@@ -151,6 +151,7 @@ export default function HomeClient() {
             <nav className="flex justify-start items-center gap-6">
               <button
                 id="menu"
+                onClick={() => (window.location.href = "cadastro")}
                 className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
                 ${
                   highContrast
