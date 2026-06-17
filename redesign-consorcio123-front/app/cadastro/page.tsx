@@ -13,7 +13,7 @@ function ErrorMsg({ mensagem }: { mensagem?: string }) {
     );
 }
 
-export default function HomeClient() {
+export default function Cadastro() {
     const [highContrast, setHighContrast] = useState(false);
     const [etapa, setEtapa] = useState(1);
     const isFirstRender = useRef(true);
@@ -91,7 +91,6 @@ export default function HomeClient() {
         }
     };
 
-    // ── FIX 4: foco no 1º campo ao mudar de etapa ────────────────────────────
     useEffect(() => {
         // Evita scroll/foco na montagem inicial
         if (isFirstRender.current) {
@@ -172,8 +171,6 @@ export default function HomeClient() {
         setEtapa(1);
     };
 
-    // ── FIX 2: coleta formData ao submeter ────────────────────────────────────
-    // ── FIX 3: só submete se tudo estiver válido ──────────────────────────────
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const erros = validarEtapa2();
@@ -311,7 +308,6 @@ export default function HomeClient() {
             className={`w-full max-w-[650px] p-12 rounded-[10px] flex flex-col gap-6
                 ${highContrast ? "bg-black border border-white" : "bg-[#100b4f]"}`}
             >
-            {/* FIX 3: onSubmit com e.preventDefault() + validação */}
             <form onSubmit={handleSubmit}>
                 {/* ── Etapa 1: Dados pessoais ──────────────────────────────────── */}
                 {etapa === 1 ? (
@@ -330,7 +326,6 @@ export default function HomeClient() {
                     </div>
                     </header>
 
-                    {/* Nome — FIX 1: input controlado */}
                     <div className="flex flex-col gap-2">
                     <label htmlFor="nome" className="text-white text-lg font-medium">
                         Nome completo
@@ -344,7 +339,7 @@ export default function HomeClient() {
                         placeholder="Nome completo"
                         className={inputBase("nome")}
                     />
-                    <ErrorMsg campo="nome" />
+                    <ErrorMsg mensagem={errors.nome} />
                     </div>
 
                     {/* CPF */}
@@ -361,7 +356,7 @@ export default function HomeClient() {
                         maxLength={14}
                         className={inputBase("cpf")}
                     />
-                    <ErrorMsg campo="cpf" />
+                    <ErrorMsg mensagem={errors.cpf} />
                     </div>
 
                     {/* RG */}
@@ -378,10 +373,9 @@ export default function HomeClient() {
                         maxLength={12}
                         className={inputBase("rg")}
                     />
-                    <ErrorMsg campo="rg" />
+                    <ErrorMsg mensagem={errors.rg} />
                     </div>
 
-                    {/* Data de nascimento — FIX 1: selects controlados com id */}
                     <fieldset className="flex flex-col gap-2">
                     <legend className="text-white text-lg font-medium mb-2">
                         Data de nascimento
@@ -400,7 +394,7 @@ export default function HomeClient() {
                             <option key={i + 1} value={i + 1}>{i + 1}</option>
                             ))}
                         </select>
-                        <ErrorMsg campo="dia" />
+                        <ErrorMsg mensagem={errors.dia} />
                         </div>
 
                         <div className="flex flex-col gap-1">
@@ -425,7 +419,7 @@ export default function HomeClient() {
                             <option value="11">Novembro</option>
                             <option value="12">Dezembro</option>
                         </select>
-                        <ErrorMsg campo="mes" />
+                        <ErrorMsg mensagem={errors.mes} />
                         </div>
 
                         <div className="flex flex-col gap-1">
@@ -444,12 +438,11 @@ export default function HomeClient() {
                             <option key={a} value={a}>{a}</option>
                             ))}
                         </select>
-                        <ErrorMsg campo="ano" />
+                        <ErrorMsg mensagem={errors.ano} />
                         </div>
                     </div>
                     </fieldset>
 
-                    {/* Gênero — FIX 1: select controlado */}
                     <div className="flex flex-col gap-2">
                     <label htmlFor="genero" className="text-white text-lg font-medium">
                         Gênero
@@ -467,7 +460,7 @@ export default function HomeClient() {
                         <option value="prefiro-nao-informar">Prefiro não informar</option>
                         <option value="outro">Outro</option>
                     </select>
-                    <ErrorMsg campo="genero" />
+                    <ErrorMsg mensagem={errors.genero} />
                     </div>
 
                     {/* Celular */}
@@ -484,10 +477,10 @@ export default function HomeClient() {
                         maxLength={15}
                         className={inputBase("celular")}
                     />
-                    <ErrorMsg campo="celular" />
+                    <ErrorMsg mensagem={errors.celular} />
                     </div>
 
-                    {/* Email — FIX 1: input controlado */}
+                    {/* Email */}
                     <div className="flex flex-col gap-2">
                     <label htmlFor="email" className="text-white text-lg font-medium">
                         Email
@@ -500,7 +493,7 @@ export default function HomeClient() {
                         placeholder="seu@email.com"
                         className={inputBase("email")}
                     />
-                    <ErrorMsg campo="email" />
+                    <ErrorMsg mensagem={errors.email} />
                     </div>
 
                     {/* Senha — FIX 1: input controlado */}
@@ -516,7 +509,7 @@ export default function HomeClient() {
                         placeholder="Senha"
                         className={inputBase("senha")}
                     />
-                    <ErrorMsg campo="senha" />
+                    <ErrorMsg mensagem={errors.senha} />
                     </div>
 
                     {/* Confirmar senha — FIX 1: input controlado */}
@@ -532,7 +525,7 @@ export default function HomeClient() {
                         placeholder="Confirme sua senha"
                         className={inputBase("confirmarSenha")}
                     />
-                    <ErrorMsg campo="confirmarSenha" />
+                    <ErrorMsg mensagem={errors.confirmarSenha} />
                     </div>
 
                     {/* FIX 4: handleProximoPasso valida e muda etapa; o useEffect cuida do foco */}
@@ -588,10 +581,10 @@ export default function HomeClient() {
                         maxLength={9}
                         className={`${inputBase("cep")} w-44`}
                     />
-                    <ErrorMsg campo="cep" />
+                    <ErrorMsg mensagem={errors.cep} />
                     </div>
 
-                    {/* Bairro — FIX 1: input controlado */}
+                    {/* Bairro */}
                     <div className="flex flex-col gap-2">
                     <label htmlFor="bairro" className="text-white text-lg font-medium">
                         Bairro
@@ -604,10 +597,10 @@ export default function HomeClient() {
                         placeholder="Vila/Bairro"
                         className={inputBase("bairro")}
                     />
-                    <ErrorMsg campo="bairro" />
+                    <ErrorMsg mensagem={errors.bairro} />
                     </div>
 
-                    {/* Rua — FIX 1: input controlado */}
+                    {/* Rua */}
                     <div className="flex flex-col gap-2">
                     <label htmlFor="rua" className="text-white text-lg font-medium">
                         Rua
@@ -620,10 +613,10 @@ export default function HomeClient() {
                         placeholder="Rua/Avenida"
                         className={inputBase("rua")}
                     />
-                    <ErrorMsg campo="rua" />
+                    <ErrorMsg mensagem={errors.rua} />
                     </div>
 
-                    {/* Número e Complemento — FIX 1: inputs controlados */}
+                    {/* Número e Complemento */}
                     <div className="grid grid-cols-[120px_1fr] gap-6">
                     <div className="flex flex-col gap-2">
                         <label htmlFor="numero" className="text-white text-lg font-medium">
@@ -637,7 +630,7 @@ export default function HomeClient() {
                         placeholder="Número"
                         className={inputBase("numero")}
                         />
-                        <ErrorMsg campo="numero" />
+                        <ErrorMsg mensagem={errors.numero} />
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -674,7 +667,6 @@ export default function HomeClient() {
                     </p>
 
                     <label className="flex items-start gap-3 text-white">
-                        {/* FIX 5: checkbox controlado + onKeyDown para Enter não submeter o form */}
                         <input
                         type="checkbox"
                         checked={aceiteTermos}
@@ -689,12 +681,11 @@ export default function HomeClient() {
                         />
                         <span>Li e concordo com o Termo de Adesão e Responsabilidade.</span>
                     </label>
-                    <ErrorMsg campo="aceiteTermos" />
+                    <ErrorMsg mensagem={errors.aceiteTermos} />
                     </fieldset>
 
                     {/* Botões */}
                     <div className="flex justify-center gap-10 mt-4">
-                    {/* FIX 4: handleVoltar limpa erros; useEffect cuida do foco */}
                     <button
                         type="button"
                         onClick={handleVoltar}
