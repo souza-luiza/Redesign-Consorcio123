@@ -156,25 +156,24 @@ export default function CadastroForms() {
                 className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
                 ${
                   highContrast
-                    ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
+                    ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:outline-none focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
                     : "bg-[#fac16d] text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
                 }`}
               >
                 Criar conta
               </button>
 
-              <Link href="/login">
-                <button
+              <button
+                onClick={() => (window.location.href = "login")}
                   className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
                   ${
                     highContrast
-                      ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
+                      ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:outline-none focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
                       : "bg-[#fac16d] text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
                 }`}
               >
                 Acessar conta
               </button>
-              </Link>
             </nav>
           </article>
 
