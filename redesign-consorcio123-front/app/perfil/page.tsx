@@ -181,7 +181,6 @@ export default function Perfil() {
     const toggleContrast = () => setHighContrast((prev) => !prev);
 
     // ── Navegação rápida (barra de acessibilidade) ────────────────────────────
-    // FIX 3: foca o título da aba ativa (primeiro elemento de conteúdo real)
     const irParaConteudo = () => {
         const el =
             document.getElementById("titulo-aba") ??
@@ -191,8 +190,7 @@ export default function Perfil() {
             el.focus();
         }
     };
-
-    // FIX 4: foca o primeiro botão dentro do nav de abas ("Abrir novo processo")
+    
     const irParaMenu = () => {
         const nav = document.getElementById("menu-abas");
         if (nav) {
@@ -290,9 +288,6 @@ export default function Perfil() {
             celular,
             endereco: { cep, bairro, rua, numero, complemento },
         };
-
-        // TODO: enviar formData atualizado para a API
-        console.log("Dados atualizados do perfil:", formData);
     };
 
     // ── Validações de abertura de processo ──────────────────────────────────
@@ -327,9 +322,6 @@ export default function Perfil() {
             arquivo: arquivo?.name,
         };
 
-        // TODO: enviar novoProcesso para a API
-        console.log("Novo processo:", novoProcesso);
-
         setProcessoSucesso(true);
         setTipoInstituicao("");
         setUnidadeEnsino("");
@@ -339,6 +331,7 @@ export default function Perfil() {
         setArquivo(null);
         setConfirmaDistancia(false);
         if (fileInputRef.current) fileInputRef.current.value = "";
+        setAbaAtiva("visualizar");
     };
 
     // ── Helpers de estilo ─────────────────────────────────────────────────────
@@ -432,8 +425,6 @@ export default function Perfil() {
         </nav>
 
         <Header highContrast={highContrast} showAccountActions />
-
-        {/* FIX 2: focus:outline-none impede anel de foco fantasma ao clicar fora de inputs */}
         <main
             id="main-content"
             tabIndex={-1}
@@ -441,7 +432,6 @@ export default function Perfil() {
             ${highContrast ? "bg-[#212121]" : "bg-white"}`}
         >
             {/* ── Barra de escolha das abas ──────────────────────────────────── */}
-            {/* FIX 2 + 4: focus:outline-none no nav; irParaMenu foca o primeiro botão */}
             <nav
                 id="menu-abas"
                 tabIndex={-1}
@@ -493,12 +483,10 @@ export default function Perfil() {
                     aria-labelledby="titulo-aba"
                     className="w-full flex justify-center py-12"
                 >
-                    {/* FIX 1: div → article (conteúdo autônomo: formulário de processo) */}
                     <article
                         className={`w-full max-w-[520px] p-12 rounded-[10px] flex flex-col gap-7
                         ${highContrast ? "bg-black border border-white" : "bg-[#100b4f]"}`}
                     >
-                        {/* FIX 2: focus:outline-none nos headings com tabIndex={-1} */}
                         <h1
                             id="titulo-aba"
                             tabIndex={-1}
@@ -508,18 +496,6 @@ export default function Perfil() {
                         </h1>
 
                         <form onSubmit={handleAbrirProcesso} className="flex flex-col gap-5">
-                            {processoSucesso && (
-                                <p
-                                    role="status"
-                                    className={`text-center text-sm font-medium rounded-lg py-2 px-3
-                                    ${highContrast ? "bg-white text-black" : "bg-[#fac16d] text-black"}`}
-                                >
-                                    Processo aberto com sucesso! Acompanhe o andamento na aba
-                                    &quot;Visualizar meus processos&quot;.
-                                </p>
-                            )}
-
-                            {/* FIX 1: div → p como container semântico de campo de formulário */}
                             <p className="flex flex-col gap-2">
                                 <label htmlFor="tipoInstituicao" className="text-white text-lg font-medium">
                                     Tipo de Instituição
@@ -627,11 +603,6 @@ export default function Perfil() {
                                 </label>
                                 <ErrorMsg mensagem={processoErrors.confirmaDistancia} />
 
-                                {/*
-                                    FIX 5: label com tabIndex={0} → entra na ordem de foco via teclado.
-                                    onKeyDown dispara o file picker com Enter ou Espaço.
-                                    O <input type="file"> recebe tabIndex={-1} para não duplicar o foco.
-                                */}
                                 <label
                                     htmlFor="arquivo"
                                     tabIndex={0}
@@ -662,7 +633,6 @@ export default function Perfil() {
                                             ? arquivo.name
                                             : "Clique ou arraste seu arquivo até aqui"}
                                     </span>
-                                    {/* tabIndex={-1}: o label gerencia o foco; o input fica fora da tab order */}
                                     <input
                                         ref={fileInputRef}
                                         id="arquivo"
@@ -698,7 +668,6 @@ export default function Perfil() {
                     aria-labelledby="titulo-aba"
                     className="w-full p-12 flex flex-col items-center gap-3.5"
                 >
-                    {/* FIX 2: focus:outline-none no heading */}
                     <h1
                         id="titulo-aba"
                         tabIndex={-1}
@@ -709,7 +678,6 @@ export default function Perfil() {
                     </h1>
 
                     {session && session.processos.length > 0 ? (
-                        // FIX 1: div → figure (conteúdo tabular autônomo com scroll horizontal)
                         <figure className="w-full overflow-x-auto">
                             <table className="w-full text-left border-collapse">
                                 <caption className="sr-only">
@@ -774,7 +742,6 @@ export default function Perfil() {
                             </table>
                         </figure>
                     ) : (
-                        // FIX 1: div → section (região distinta: estado vazio com CTA)
                         <section
                             aria-label="Nenhum processo encontrado"
                             className="self-stretch flex flex-col justify-center items-center gap-3"
@@ -813,7 +780,6 @@ export default function Perfil() {
                     aria-labelledby="titulo-aba"
                     className="self-stretch px-12 pt-12 pb-7 flex flex-col gap-5"
                 >
-                    {/* FIX 2: focus:outline-none no heading */}
                     <h1
                         id="titulo-aba"
                         tabIndex={-1}
@@ -827,7 +793,6 @@ export default function Perfil() {
                         <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <legend className="sr-only">Dados pessoais</legend>
 
-                            {/* FIX 1: div → p para cada campo do formulário */}
                             <p className="flex flex-col gap-2">
                                 <label
                                     htmlFor="nome"
@@ -885,18 +850,13 @@ export default function Perfil() {
                                 <ErrorMsg mensagem={errors.rg} />
                             </p>
 
-                            {/* FIX 1: fieldset de data mantido; div interno → fieldset aninhado */}
                             <fieldset className="flex flex-col gap-2">
                                 <legend
                                     className={`text-lg font-medium mb-2 ${highContrast ? "text-white" : "text-black"}`}
                                 >
                                     Data de nascimento
                                 </legend>
-                                {/*
-                                    FIX 1: div.grid → fieldset aninhado semântico para o grupo
-                                    dos três selects de data. border-0/p-0/m-0 resetam o estilo
-                                    padrão do navegador para fieldset.
-                                */}
+
                                 <fieldset className="grid grid-cols-3 gap-3 border-0 p-0 m-0">
                                     <legend className="sr-only">Dia, mês e ano</legend>
 
@@ -1070,10 +1030,6 @@ export default function Perfil() {
                                 <ErrorMsg mensagem={errors.rua} />
                             </p>
 
-                            {/*
-                                FIX 1: div.grid → fieldset aninhado semântico para
-                                o subgrupo Número + Complemento dentro do endereço.
-                            */}
                             <fieldset className="grid grid-cols-[120px_1fr] gap-6 border-0 p-0 m-0">
                                 <legend className="sr-only">Número e complemento</legend>
 
@@ -1114,7 +1070,6 @@ export default function Perfil() {
                             </fieldset>
                         </fieldset>
 
-                        {/* FIX 1: div → p como container do botão de submissão */}
                         <p className="self-stretch pt-2.5 pb-5 flex flex-col justify-center items-center gap-2.5">
                             <button
                                 type="submit"
