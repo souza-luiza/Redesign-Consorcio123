@@ -5,4 +5,5 @@ O objetivo do projeto é analisar o sistema atual do Consórcio 123 (responsáve
 
 
 Link para Figma do Projeto: https://www.figma.com/design/RJXmYucgdXLDKJbRzJ36ST/Consorcio123?node-id=197-611&p=f&m=dev
+
 Link para o protótipo de Alta Fidelidade: https://redesign-consorcio123-fork.vercel.app/
