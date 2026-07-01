@@ -90,7 +90,7 @@ function ErrorMsg({ mensagem }: { mensagem?: string }) {
 
 export default function Perfil() {
     const [highContrast, setHighContrast] = useState(false);
-    const [abaAtiva, setAbaAtiva] = useState<Aba>("editar");
+    const [abaAtiva, setAbaAtiva] = useState<Aba>("abrir");
     const isFirstRender = useRef(true);
 
     // ── Dados recuperados da "session" ───────────────────────────────────────
@@ -631,7 +631,7 @@ export default function Perfil() {
                                     <span className="text-sm font-medium">
                                         {arquivo
                                             ? arquivo.name
-                                            : "Clique ou arraste seu arquivo até aqui"}
+                                            : "Clique ou arraste seu comprovante de matrícula, em PDF, até aqui."}
                                     </span>
                                     <input
                                         ref={fileInputRef}

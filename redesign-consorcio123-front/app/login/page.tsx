@@ -273,7 +273,7 @@ export default function Login() {
                     : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-4"
                 }`}
               >
-                Cadastre-se
+              Cadastre-se
               </a>
             </p>
           </div>
