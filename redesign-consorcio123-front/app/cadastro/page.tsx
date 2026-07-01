@@ -198,7 +198,7 @@ export default function Cadastro() {
         aceiteTermos,
         };
 
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "/";
         console.log("Dados do formulário:", formData);
         // TODO: enviar formData para a API
     };
