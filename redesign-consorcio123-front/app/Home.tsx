@@ -69,7 +69,7 @@ export default function CadastroForms() {
       >
         <button
           onClick={irParaConteudo}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -87,7 +87,7 @@ export default function CadastroForms() {
 
         <button
           onClick={irParaMenu}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -105,7 +105,7 @@ export default function CadastroForms() {
 
         <button
           onClick={toggleContrast}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -152,7 +152,7 @@ export default function CadastroForms() {
               <button
                 id="menu"
                 onClick={() => (window.location.href = "cadastro")}
-                className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
+                className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors cursor-pointer
                 ${
                   highContrast
                     ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:outline-none focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
@@ -164,7 +164,7 @@ export default function CadastroForms() {
 
                 <button
                   onClick={() => (window.location.href = "login")}
-                  className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
+                  className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors cursor-pointer
                   ${
                     highContrast
                       ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:outline-none focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
@@ -220,7 +220,7 @@ export default function CadastroForms() {
           ].map((card) => (
             <article
               key={card.title}
-              className={`p-6 rounded-[10px] flex flex-col justify-start items-center text-center gap-4
+              className={`p-6 rounded-[10px] flex flex-col justify-start items-center text-center gap-4 cursor-pointer
               ${
                 highContrast
                   ? "bg-black border border-white"

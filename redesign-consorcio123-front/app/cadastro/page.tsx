@@ -669,7 +669,7 @@ export default function Cadastro() {
                         </label>
                         <input
                         id="numero"
-                        type="text"
+                        type="number"
                         value={numero}
                         onChange={(e) => setNumero(e.target.value)}
                         placeholder="Número"

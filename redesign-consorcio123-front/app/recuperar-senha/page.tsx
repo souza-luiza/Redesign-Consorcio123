@@ -120,7 +120,7 @@ export default function RecuperarSenha() {
       >
         <button
           onClick={irParaConteudo}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -138,7 +138,7 @@ export default function RecuperarSenha() {
 
         <button
           onClick={irParaMenu}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -156,7 +156,7 @@ export default function RecuperarSenha() {
 
         <button
           onClick={toggleContrast}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -264,7 +264,7 @@ export default function RecuperarSenha() {
                 />
                 </div>
                 
-                <button type="submit" className={`px-10 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                <button type="submit" className={`px-10 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
                         ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
@@ -306,7 +306,7 @@ export default function RecuperarSenha() {
                 
                 <button 
                   type="button" 
-                  className={`mb-8 px-6 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                  className={`mb-8 px-6 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                     highContrast
                         ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
@@ -320,7 +320,7 @@ export default function RecuperarSenha() {
                   <button 
                     type="button" 
                     onClick={() => setCurrentStep(1)} 
-                    className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                    className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
                             ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                             : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
@@ -328,7 +328,7 @@ export default function RecuperarSenha() {
                   >
                     &larr; Voltar
                   </button>
-                  <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                  <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
                         ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
@@ -366,7 +366,7 @@ export default function RecuperarSenha() {
                     <button 
                       type="button" 
                       onClick={() => setShowPassword(!showPassword)} 
-                      className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                      className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors cursor-pointer ${
                             highContrast
                             ? "text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
                             : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
@@ -396,7 +396,7 @@ export default function RecuperarSenha() {
                     <button 
                       type="button" 
                       onClick={() => setShowPassword(!showPassword)} 
-                      className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                      className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors cursor-pointer ${
                             highContrast
                             ? "text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
                             : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
@@ -410,14 +410,14 @@ export default function RecuperarSenha() {
                   <button 
                     type="button" 
                     onClick={() => setCurrentStep(2)} 
-                    className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                    className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
                         ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}>
                     &larr; Voltar
                   </button>
-                  <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                  <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
                         ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"

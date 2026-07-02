@@ -55,7 +55,7 @@ export default function Header({
           <button
             type="button"
             onClick={handleSair}
-            className={`h-12 px-5 py-2.5 rounded-[10px] flex justify-center items-center text-lg font-medium transition-colors outline-none
+            className={`h-12 px-5 py-2.5 rounded-[10px] flex justify-center items-center text-lg font-medium transition-colors outline-none cursor-pointer
             ${
               highContrast
                 ? "border-2 border-white text-white hover:bg-[#f69c0a] hover:border-none hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-none"

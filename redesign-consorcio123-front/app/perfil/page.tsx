@@ -369,7 +369,7 @@ export default function Perfil() {
         >
             <button
                 onClick={irParaConteudo}
-                className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+                className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
                     ${
                     highContrast
                         ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -387,7 +387,7 @@ export default function Perfil() {
 
             <button
                 onClick={irParaMenu}
-                className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+                className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
                     ${
                     highContrast
                         ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -405,7 +405,7 @@ export default function Perfil() {
 
             <button
                 onClick={toggleContrast}
-                className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+                className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
                     ${
                     highContrast
                         ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -446,7 +446,7 @@ export default function Perfil() {
                             type="button"
                             onClick={() => setAbaAtiva(aba.id)}
                             aria-current={ativa ? "page" : undefined}
-                            className={`group flex-1 h-12 px-5 py-2.5 flex justify-center items-center gap-2.5 transition-colors outline-none
+                            className={`group flex-1 h-12 px-5 py-2.5 flex justify-center items-center gap-2.5 transition-colors outline-none cursor-pointer
                             focus:bg-[#f69c0a]
                             ${
                                 ativa
@@ -647,7 +647,7 @@ export default function Perfil() {
 
                             <button
                                 type="submit"
-                                className={`self-center mt-2 px-6 py-3 rounded-[10px]
+                                className={`self-center mt-2 px-6 py-3 rounded-[10px] cursor-pointer
                                     text-lg font-medium transition-colors outline-none
                                     ${
                                     highContrast
@@ -758,7 +758,7 @@ export default function Perfil() {
                             <button
                                 type="button"
                                 onClick={() => setAbaAtiva("abrir")}
-                                className={`h-12 px-5 py-2.5 rounded-[10px] flex justify-center items-center gap-2.5
+                                className={`h-12 px-5 py-2.5 rounded-[10px] flex justify-center items-center gap-2.5 cursor-pointer
                                     text-2xl font-normal font-['Space_Grotesk'] transition-colors outline-none
                                     focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#f69c0a]
                                     ${
@@ -1074,7 +1074,7 @@ export default function Perfil() {
                             <button
                                 type="submit"
                                 className={`h-12 px-5 py-2.5 rounded-[10px] flex justify-center items-center gap-2.5
-                                    text-2xl font-normal font-['Space_Grotesk'] transition-colors outline-none
+                                    text-2xl font-normal font-['Space_Grotesk'] transition-colors outline-none cursor-pointer
                                     ${
                                     highContrast
                                         ? "border-2 border-white text-white hover:bg-[#f69c0a] hover:border-none hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-none"
