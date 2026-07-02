@@ -82,7 +82,16 @@ export default function Cadastro() {
     };
 
     // ── Alto contraste ────────────────────────────────────────────────────────
-    const toggleContrast = () => setHighContrast((prev) => !prev);
+    const toggleContrast = () => {
+        const novoValor = !highContrast;
+        setHighContrast(novoValor); 
+        localStorage.setItem('alto-contraste', String(novoValor));
+    }
+    
+    useEffect(() => {
+        const storage = localStorage.getItem('alto-contraste') === 'true';
+        setHighContrast(storage);
+    }, []);
 
     // ── Navegação rápida (barra de acessibilidade) ────────────────────────────
     const irParaConteudo = () => {

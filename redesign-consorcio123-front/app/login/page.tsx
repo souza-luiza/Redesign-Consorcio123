@@ -18,8 +18,15 @@ export default function Login() {
   const router = useRouter();
 
   const toggleContrast = () => {
-    setHighContrast((prev) => !prev);
+    const novoValor = !highContrast;
+    setHighContrast(novoValor); 
+    localStorage.setItem('alto-contraste', String(novoValor));
   };
+
+  useEffect(() => {
+    const storage = localStorage.getItem('alto-contraste') === 'true';
+    setHighContrast(storage);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

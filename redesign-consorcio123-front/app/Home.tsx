@@ -10,8 +10,15 @@ export default function CadastroForms() {
   const [highContrast, setHighContrast] = useState(false);
 
   const toggleContrast = () => {
-    setHighContrast((prev) => !prev);
-  };
+    const novoValor = !highContrast;
+    setHighContrast(novoValor); 
+    localStorage.setItem('alto-contraste', String(novoValor));
+  }
+  
+  useEffect(() => {
+    const storage = localStorage.getItem('alto-contraste') === 'true';
+    setHighContrast(storage);
+  }, []);
 
   const irParaMenu = () => {
     const criarConta = document.getElementById("menu");
