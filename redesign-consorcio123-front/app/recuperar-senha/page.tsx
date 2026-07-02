@@ -243,7 +243,6 @@ export default function RecuperarSenha() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
           <form onSubmit={handleSubmit} noValidate className="flex flex-col items-center w-full">
             {/* ETAPA 1: Identificação */}
             {currentStep === 1 && (
