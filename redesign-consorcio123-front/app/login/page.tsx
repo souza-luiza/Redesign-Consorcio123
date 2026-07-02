@@ -7,9 +7,11 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 export default function Login() {
-  const [highContrast, setHighContrast] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  
+  const [highContrast, setHighContrast] = useState(() => {
+    return localStorage.getItem("alto-contraste") === "true";
+  });
+
   // Estados para os inputs e validação
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,11 +24,6 @@ export default function Login() {
     setHighContrast(novoValor); 
     localStorage.setItem('alto-contraste', String(novoValor));
   };
-
-  useEffect(() => {
-    const storage = localStorage.getItem('alto-contraste') === 'true';
-    setHighContrast(storage);
-  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

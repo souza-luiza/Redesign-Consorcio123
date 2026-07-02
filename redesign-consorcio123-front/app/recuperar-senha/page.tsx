@@ -7,8 +7,10 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 export default function RecuperarSenha() {
-  const [highContrast, setHighContrast] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [highContrast, setHighContrast] = useState(() => {
+    return localStorage.getItem("alto-contraste") === "true";
+  });
   
   // Controle de etapas (1: Email, 2: Código, 3: Nova Senha)
   const [currentStep, setCurrentStep] = useState(1);
@@ -28,11 +30,6 @@ export default function RecuperarSenha() {
     setHighContrast(novoValor); 
     localStorage.setItem('alto-contraste', String(novoValor));
   }
-  
-  useEffect(() => {
-    const storage = localStorage.getItem('alto-contraste') === 'true';
-    setHighContrast(storage);
-  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

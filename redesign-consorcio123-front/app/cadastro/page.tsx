@@ -15,9 +15,11 @@ function ErrorMsg({ mensagem }: { mensagem?: string }) {
 }
 
 export default function Cadastro() {
-    const [highContrast, setHighContrast] = useState(false);
     const [etapa, setEtapa] = useState(1);
     const isFirstRender = useRef(true);
+    const [highContrast, setHighContrast] = useState(() => {
+        return localStorage.getItem("alto-contraste") === "true";
+    });
 
     // ── Etapa 1 ──────────────────────────────────────────────────────────────
     const [nome, setNome] = useState("");
@@ -87,11 +89,6 @@ export default function Cadastro() {
         setHighContrast(novoValor); 
         localStorage.setItem('alto-contraste', String(novoValor));
     }
-    
-    useEffect(() => {
-        const storage = localStorage.getItem('alto-contraste') === 'true';
-        setHighContrast(storage);
-    }, []);
 
     // ── Navegação rápida (barra de acessibilidade) ────────────────────────────
     const irParaConteudo = () => {

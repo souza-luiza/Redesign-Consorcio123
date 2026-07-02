@@ -7,18 +7,15 @@ import Image from "next/image";
 
 export default function CadastroForms() {
 
-  const [highContrast, setHighContrast] = useState(false);
+  const [highContrast, setHighContrast] = useState(() => {
+    return localStorage.getItem("alto-contraste") === "true";
+  });
 
   const toggleContrast = () => {
     const novoValor = !highContrast;
     setHighContrast(novoValor); 
     localStorage.setItem('alto-contraste', String(novoValor));
   }
-  
-  useEffect(() => {
-    const storage = localStorage.getItem('alto-contraste') === 'true';
-    setHighContrast(storage);
-  }, []);
 
   const irParaMenu = () => {
     const criarConta = document.getElementById("menu");

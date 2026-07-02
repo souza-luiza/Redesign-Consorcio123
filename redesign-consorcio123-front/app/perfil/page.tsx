@@ -89,9 +89,11 @@ function ErrorMsg({ mensagem }: { mensagem?: string }) {
 }
 
 export default function Perfil() {
-    const [highContrast, setHighContrast] = useState(false);
     const [abaAtiva, setAbaAtiva] = useState<Aba>("abrir");
     const isFirstRender = useRef(true);
+    const [highContrast, setHighContrast] = useState(() => {
+        return localStorage.getItem("alto-contraste") === "true";
+    });
 
     // ── Dados recuperados da "session" ───────────────────────────────────────
     const [session, setSession] = useState<SessionData | null>(null);
@@ -209,11 +211,6 @@ export default function Perfil() {
         setHighContrast(novoValor); 
         localStorage.setItem('alto-contraste', String(novoValor));
     }
-    
-    useEffect(() => {
-        const storage = localStorage.getItem('alto-contraste') === 'true';
-        setHighContrast(storage);
-    }, []);
 
     // ── Navegação rápida (barra de acessibilidade) ────────────────────────────
     const irParaConteudo = () => {
