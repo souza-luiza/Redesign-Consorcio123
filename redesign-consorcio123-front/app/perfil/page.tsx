@@ -396,7 +396,7 @@ export default function Perfil() {
     ];
 
     const tituloAba: Record<Aba, string> = {
-        abrir: "Abrir um novo processo",
+        abrir: "Abrir um novo processo para solicitar passe estudantil",
         visualizar: "Meus Processos",
         editar: "Edite seus dados pessoais",
     };
@@ -676,7 +676,9 @@ export default function Perfil() {
                                         className={`rounded-2xl p-2 ${highContrast ? "bg-black" : "bg-[#100b4f]"}`}
                                     />
                                     <span className="text-sm font-medium">
-                                        {arquivo ? arquivo.name : "Clique ou arraste seu comprovante de matrícula, em PDF, até aqui."}
+                                        {arquivo
+                                            ? `Arquivo selecionado: ${arquivo.name}`
+                                            : "Clique aqui para selecionar seu comprovante de matrícula em PDF."}
                                     </span>
                                     <input
                                         ref={fileInputRef}
@@ -684,6 +686,7 @@ export default function Perfil() {
                                         type="file"
                                         tabIndex={-1}
                                         className="sr-only"
+                                        accept=".pdf"
                                         onChange={(e) => setArquivo(e.target.files?.[0] ?? null)}
                                     />
                                 </label>

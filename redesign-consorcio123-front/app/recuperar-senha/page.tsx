@@ -19,6 +19,7 @@ export default function RecuperarSenha() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [infoMsg, setInfoMsg] = useState("");
   
   const router = useRouter();
 
@@ -186,7 +187,12 @@ export default function RecuperarSenha() {
         className="flex-1 flex flex-col items-center justify-center p-6 focus:outline-none"
       >
         {/* Stepper / Indicador de Progresso */}
-        <div className="flex items-start justify-center gap-2 mb-10 w-full max-w-lg mx-auto">
+        <span className="sr-only" aria-live="polite" aria-atomic="true">
+          {currentStep === 1 && "Passo 1 de 3: Identificação."}
+          {currentStep === 2 && "Passo 2 de 3: Envio do código de recuperação."}
+          {currentStep === 3 && "Passo 3 de 3: Redefinição de senha."}
+        </span>
+        <div className="flex items-start justify-center gap-2 mb-10 w-full max-w-lg mx-auto" aria-hidden="true">
           {/* Step 1 */}
           <div className="flex flex-col items-center w-28">
             <div className={`w-6 h-6 rounded-full flex items-center justify-center z-10 
@@ -234,17 +240,17 @@ export default function RecuperarSenha() {
 
         {/* Card Principal */}
         <div className={cardClass}>
-          {errorMsg && (
-            <div className="border bg-[#e65100] text-white p-3 rounded-md text-sm mb-6 text-center font-medium">
-              {errorMsg}
+          {infoMsg && (
+            <div className="border bg-[#e65100] text-white p-3 rounded-md text-sm mb-6 text-center font-medium" role="alert">
+              {infoMsg}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col items-center w-full">
             {/* ETAPA 1: Identificação */}
             {currentStep === 1 && (
               <>
-                <h2 className="text-center text-[17px] leading-snug font-medium mb-8 max-w-sm">
+                <h2 id="email-instrucao" className="text-center text-[17px] leading-snug font-medium mb-8 max-w-sm">
                   Insira seu email cadastrado para que possamos enviar o código de recuperação
                 </h2>
                 
@@ -255,6 +261,8 @@ export default function RecuperarSenha() {
                   <input
                     type="email"
                     id="email"
+                    aria-invalid={!!errorMsg}
+                    aria-describedby={`email-instrucao ${errorMsg ? "email-error" : ""}`.trim()}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="exemplo@email.com"
@@ -264,7 +272,17 @@ export default function RecuperarSenha() {
                         : "focus:ring-4 focus:ring-[#e65100]"
                     }`}
                     required
-                />
+                  />
+                  {errorMsg && (
+                    <p
+                      id="email-error"
+                      role="alert"
+                      className="mt-2 text-sm text-red-500"
+                    >
+                      {errorMsg}
+                    </p>
+                  )}
+
                 </div>
                 
                 <button type="submit" className={`px-10 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
@@ -283,9 +301,9 @@ export default function RecuperarSenha() {
                 <h2 className="text-center text-xl font-bold mb-4">
                   Recuperação de Senha
                 </h2>
-                <p className="text-center text-sm mb-8 text-gray-200">
-                  Um código foi enviado ao email: email***@gm**. <br />
-                  Verifique e coloque no campo seguinte
+                <p id="codigo-instrucao" className="text-center text-sm mb-8 text-gray-200">
+                  Um código de recuperação foi enviado para o e-mail cadastrado. <br />
+                  Digite o código recebido abaixo.
                 </p>
                 
                 <div className="w-full mb-6">
@@ -295,7 +313,9 @@ export default function RecuperarSenha() {
                   <input
                     type="text"
                     id="codigo"
-                    placeholder="********"
+                    aria-invalid={!!errorMsg}
+                    aria-describedby={`codigo-instrucao ${errorMsg ? "codigo-error" : ""}`}
+                    placeholder="12345"
                     className={`w-full px-4 py-3 bg-white rounded-md text-sm text-black outline-none transition-shadow ${
                     highContrast
                         ? "focus:ring-4 focus:ring-[#fac16d]"
@@ -305,6 +325,15 @@ export default function RecuperarSenha() {
                     value={codigo}
                     onChange={(e) => setCodigo(e.target.value)}
                   />
+                  {errorMsg && (
+                    <p
+                      id="codigo-error"
+                      role="alert"
+                      className="mt-2 text-sm text-red-500"
+                    >
+                      {errorMsg}
+                    </p>
+                  )}
                 </div>
                 
                 <button 
@@ -314,7 +343,7 @@ export default function RecuperarSenha() {
                         ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}
-                    onClick={() => {setErrorMsg("Um novo código foi enviado para seu email.");}}
+                    onClick={() => {setInfoMsg("Um novo código foi enviado para seu email."); setErrorMsg("");}}
                         >
                   Reenviar código de recuperação
                 </button>
@@ -322,7 +351,7 @@ export default function RecuperarSenha() {
                 <div className="flex justify-center gap-6 w-full">
                   <button 
                     type="button" 
-                    onClick={() => setCurrentStep(1)} 
+                    onClick={() => {setCurrentStep(1); setErrorMsg(""); setInfoMsg("");}} 
                     className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
                             ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
@@ -335,7 +364,7 @@ export default function RecuperarSenha() {
                         highContrast
                         ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
-                    }`}>
+                    }`} onClick={() => setInfoMsg("")}>
                     Continuar
                   </button>
                 </div>
@@ -345,7 +374,7 @@ export default function RecuperarSenha() {
             {/* ETAPA 3: Redefinição de senha */}
             {currentStep === 3 && (
               <>
-                <h2 className="text-center text-[17px] leading-snug font-medium mb-8 max-w-sm">
+                <h2 id="senha-intrucao" className="text-center text-[17px] leading-snug font-medium mb-8 max-w-sm">
                   Código aceito! Defina uma nova senha para sua conta.
                 </h2>
                 
@@ -357,6 +386,8 @@ export default function RecuperarSenha() {
                     <input
                       type={showPassword ? "text" : "password"}
                       id="new-password"
+                      aria-invalid={!!errorMsg}
+                      aria-describedby={`senha-instrucao ${errorMsg ? "password-error" : ""}`}
                       placeholder="********"
                       className={`w-full px-4 py-3 bg-white rounded-md text-sm text-black outline-none transition-shadow ${
                     highContrast
@@ -377,6 +408,15 @@ export default function RecuperarSenha() {
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                   </div>
+                  {errorMsg && (
+                      <p
+                        id="password-error"
+                        role="alert"
+                        className="mt-2 text-sm text-red-500"
+                      >
+                        {errorMsg}
+                      </p>
+                    )}
                 </div>
                 
                 <div className="w-full mb-8 relative">
@@ -395,6 +435,7 @@ export default function RecuperarSenha() {
                     }`}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
                     />
                     <button 
                       type="button" 
@@ -412,7 +453,7 @@ export default function RecuperarSenha() {
                 <div className="flex justify-center gap-6 w-full">
                   <button 
                     type="button" 
-                    onClick={() => setCurrentStep(2)} 
+                    onClick={() => {setCurrentStep(2); setErrorMsg("");}} 
                     className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
                         ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
