@@ -244,10 +244,11 @@ export default function RecuperarSenha() {
           )}
 
           <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col items-center w-full">
             {/* ETAPA 1: Identificação */}
             {currentStep === 1 && (
               <>
-                <h2 className="text-center text-[17px] leading-snug font-medium mb-8 max-w-sm">
+                <h2 id="email-instrucao" className="text-center text-[17px] leading-snug font-medium mb-8 max-w-sm">
                   Insira seu email cadastrado para que possamos enviar o código de recuperação
                 </h2>
                 
@@ -258,6 +259,8 @@ export default function RecuperarSenha() {
                   <input
                     type="email"
                     id="email"
+                    aria-invalid={!!errorMsg}
+                    aria-describedby={`email-instrucao ${errorMsg ? "email-error" : ""}`.trim()}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="exemplo@email.com"
@@ -267,7 +270,17 @@ export default function RecuperarSenha() {
                         : "focus:ring-4 focus:ring-[#e65100]"
                     }`}
                     required
-                />
+                  />
+                  {errorMsg && (
+                    <p
+                      id="email-error"
+                      role="alert"
+                      className="mt-2 text-sm text-red-500"
+                    >
+                      {errorMsg}
+                    </p>
+                  )}
+
                 </div>
                 
                 <button type="submit" className={`px-10 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
@@ -286,9 +299,9 @@ export default function RecuperarSenha() {
                 <h2 className="text-center text-xl font-bold mb-4">
                   Recuperação de Senha
                 </h2>
-                <p className="text-center text-sm mb-8 text-gray-200">
-                  Um código foi enviado ao email: email***@gm**. <br />
-                  Verifique e coloque no campo seguinte
+                <p id="codigo-instrucao" className="text-center text-sm mb-8 text-gray-200">
+                  Um código de recuperação foi enviado para o e-mail cadastrado. <br />
+                  Digite o código recebido abaixo.
                 </p>
                 
                 <div className="w-full mb-6">
@@ -298,7 +311,9 @@ export default function RecuperarSenha() {
                   <input
                     type="text"
                     id="codigo"
-                    placeholder="********"
+                    aria-invalid={!!errorMsg}
+                    aria-describedby={`codigo-instrucao ${errorMsg ? "codigo-error" : ""}`}
+                    placeholder="12345"
                     className={`w-full px-4 py-3 bg-white rounded-md text-sm text-black outline-none transition-shadow ${
                     highContrast
                         ? "focus:ring-4 focus:ring-[#fac16d]"
@@ -308,6 +323,15 @@ export default function RecuperarSenha() {
                     value={codigo}
                     onChange={(e) => setCodigo(e.target.value)}
                   />
+                  {errorMsg && (
+                    <p
+                      id="codigo-error"
+                      role="alert"
+                      className="mt-2 text-sm text-red-500"
+                    >
+                      {errorMsg}
+                    </p>
+                  )}
                 </div>
                 
                 <button 
@@ -348,7 +372,7 @@ export default function RecuperarSenha() {
             {/* ETAPA 3: Redefinição de senha */}
             {currentStep === 3 && (
               <>
-                <h2 className="text-center text-[17px] leading-snug font-medium mb-8 max-w-sm">
+                <h2 id="senha-intrucao" className="text-center text-[17px] leading-snug font-medium mb-8 max-w-sm">
                   Código aceito! Defina uma nova senha para sua conta.
                 </h2>
                 
@@ -360,6 +384,8 @@ export default function RecuperarSenha() {
                     <input
                       type={showPassword ? "text" : "password"}
                       id="new-password"
+                      aria-invalid={!!errorMsg}
+                      aria-describedby={`senha-instrucao ${errorMsg ? "password-error" : ""}`}
                       placeholder="********"
                       className={`w-full px-4 py-3 bg-white rounded-md text-sm text-black outline-none transition-shadow ${
                     highContrast
@@ -380,6 +406,15 @@ export default function RecuperarSenha() {
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                   </div>
+                  {errorMsg && (
+                      <p
+                        id="password-error"
+                        role="alert"
+                        className="mt-2 text-sm text-red-500"
+                      >
+                        {errorMsg}
+                      </p>
+                    )}
                 </div>
                 
                 <div className="w-full mb-8 relative">
