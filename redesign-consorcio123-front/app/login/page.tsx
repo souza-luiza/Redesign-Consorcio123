@@ -277,13 +277,13 @@ export default function Login() {
               Não tem uma conta?{" "}
               <a
                 href="/cadastro"
-                className={`group inline-block outline-none rounded cursor-pointer ${
+                className={`group inline-block outline-none rounded cursor-pointer px-1 ${
                   highContrast
                     ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-2"
                     : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-2"
                 }`}
               >
-                <span className="inline-block font-bold transition-transform transform group-hover:scale-110">
+                <span className="inline-block font-bold transition-transform transform group-hover:scale-110 px-1">
                   Cadastre-se
                 </span>
               </a>
