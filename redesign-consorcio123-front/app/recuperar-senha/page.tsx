@@ -269,7 +269,7 @@ export default function RecuperarSenha() {
                 
                 <button type="submit" className={`px-10 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}>
                   Continuar
@@ -311,7 +311,7 @@ export default function RecuperarSenha() {
                   type="button" 
                   className={`mb-8 px-6 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                     highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}
                     onClick={() => {setErrorMsg("Um novo código foi enviado para seu email.");}}
@@ -325,7 +325,7 @@ export default function RecuperarSenha() {
                     onClick={() => setCurrentStep(1)} 
                     className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                            ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                            ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                             : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                         }`}
                   >
@@ -333,7 +333,7 @@ export default function RecuperarSenha() {
                   </button>
                   <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}>
                     Continuar
@@ -415,14 +415,14 @@ export default function RecuperarSenha() {
                     onClick={() => setCurrentStep(2)} 
                     className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}>
                     &larr; Voltar
                   </button>
                   <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}>
                     Confirmar

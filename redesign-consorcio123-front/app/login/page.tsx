@@ -251,7 +251,7 @@ export default function Login() {
               type="submit"
               className={`mt-2 mx-auto px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                 highContrast
-                  ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                  ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                   : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
               }`}
             >
