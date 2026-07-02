@@ -238,7 +238,7 @@ export default function RecuperarSenha() {
         {/* Card Principal */}
         <div className={cardClass}>
           {infoMsg && (
-            <div className="border bg-[#e65100] text-white p-3 rounded-md text-sm mb-6 text-center font-medium" role="status" aria-live="polite" aria-atomic="true">
+            <div className="border bg-[#e65100] text-white p-3 rounded-md text-sm mb-6 text-center font-medium" role="alert">
               {infoMsg}
             </div>
           )}
