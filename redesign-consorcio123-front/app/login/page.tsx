@@ -173,11 +173,12 @@ export default function Login() {
         className="flex-grow flex items-center justify-center py-12 px-4 outline-none"
       >
         <section
+          aria-labelledby="main-titulo"
           className={`w-full max-w-[440px] p-10 rounded-xl flex flex-col gap-8 shadow-sm ${
             highContrast ? "bg-[#0a0a0a]" : "bg-[#100b4f]"
           }`}
         >
-          <h1 className="text-white text-center text-xl font-medium">
+          <h1 id="main-titulo" className="text-white text-center text-xl font-medium">
             Acessar sua conta
           </h1>
 

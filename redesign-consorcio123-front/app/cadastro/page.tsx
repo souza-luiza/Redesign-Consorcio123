@@ -656,8 +656,8 @@ export default function Cadastro() {
                             text-lg font-medium transition-colors outline-none
                             ${
                             highContrast
-                                ? "bg-white text-black hover:bg-[#f69c0a] focus:bg-[#f69c0a]"
-                                : "bg-[#fac16d] text-black hover:bg-[#f69c0a] focus:bg-[#f69c0a]"
+                               ? "border-white border-2 bg-black text-white hover:outline-none hover:border-none hover:text-black hover:bg-[#f69c0a] focus:bg-[#f69c0a]"
+                            : "bg-[#fac16d] text-black hover:bg-[#f69c0a] focus:bg-[#f69c0a]"
                             }`}
                         >
                             Próximo Passo
