@@ -19,6 +19,7 @@ export default function RecuperarSenha() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [infoMsg, setInfoMsg] = useState("");
   
   const router = useRouter();
 
@@ -231,9 +232,9 @@ export default function RecuperarSenha() {
 
         {/* Card Principal */}
         <div className={cardClass}>
-          {errorMsg && (
-            <div className="border bg-[#e65100] text-white p-3 rounded-md text-sm mb-6 text-center font-medium">
-              {errorMsg}
+          {infoMsg && (
+            <div className="border bg-[#e65100] text-white p-3 rounded-md text-sm mb-6 text-center font-medium" role="status" aria-live="polite" aria-atomic="true">
+              {infoMsg}
             </div>
           )}
 
@@ -311,7 +312,7 @@ export default function RecuperarSenha() {
                         ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}
-                    onClick={() => {setErrorMsg("Um novo código foi enviado para seu email.");}}
+                    onClick={() => {setInfoMsg("Um novo código foi enviado para seu email."); setErrorMsg("");}}
                         >
                   Reenviar código de recuperação
                 </button>
@@ -319,7 +320,7 @@ export default function RecuperarSenha() {
                 <div className="flex justify-center gap-6 w-full">
                   <button 
                     type="button" 
-                    onClick={() => setCurrentStep(1)} 
+                    onClick={() => {setCurrentStep(1); setErrorMsg(""); setInfoMsg("");}} 
                     className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
                         highContrast
                             ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
@@ -332,7 +333,7 @@ export default function RecuperarSenha() {
                         highContrast
                         ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
-                    }`}>
+                    }`} onClick={() => setInfoMsg("")}>
                     Continuar
                   </button>
                 </div>
@@ -392,6 +393,7 @@ export default function RecuperarSenha() {
                     }`}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
                     />
                     <button 
                       type="button" 
@@ -409,7 +411,7 @@ export default function RecuperarSenha() {
                 <div className="flex justify-center gap-6 w-full">
                   <button 
                     type="button" 
-                    onClick={() => setCurrentStep(2)} 
+                    onClick={() => {setCurrentStep(2); setErrorMsg("");}} 
                     className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
                         highContrast
                         ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
