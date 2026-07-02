@@ -102,7 +102,7 @@ export default function Login() {
       >
         <button
           onClick={irParaConteudo}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -120,7 +120,7 @@ export default function Login() {
 
         <button
           onClick={irParaMenu}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -138,7 +138,7 @@ export default function Login() {
 
         <button
           onClick={toggleContrast}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -228,7 +228,7 @@ export default function Login() {
                   aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                   aria-pressed={showPassword}
                   onClick={() => setShowPassword(!showPassword)}
-                  className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                  className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors cursor-pointer ${
                     highContrast
                       ? "text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
                       : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
@@ -241,7 +241,7 @@ export default function Login() {
 
             <button
               type="submit"
-              className={`mt-2 mx-auto px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+              className={`mt-2 mx-auto px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                 highContrast
                   ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
                   : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
@@ -254,26 +254,30 @@ export default function Login() {
           <div className="flex flex-col items-center gap-6 mt-2">
             <a
               href="/recuperar-senha"
-              className={`inline-block text-white font-bold text-xs outline-none rounded p-1 transition-all transform hover:scale-110 ${
+              className={`group inline-block outline-none rounded cursor-pointer ${
                 highContrast
-                  ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-4"
-                  : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-4"
+                  ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-2"
+                  : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-2"
               }`}
             >
-              Esqueceu a senha?
+              <span className="inline-block text-white font-bold text-xs transition-transform transform group-hover:scale-110">
+                Esqueceu a senha?
+              </span>
             </a>
 
             <p className="text-white text-xs">
               Não tem uma conta?{" "}
               <a
                 href="/cadastro"
-                className={`inline-block font-bold outline-none rounded p-1 transition-all transform hover:scale-110 ${
+                className={`group inline-block outline-none rounded cursor-pointer ${
                   highContrast
-                    ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-4"
-                    : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-4"
+                    ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-2"
+                    : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-2"
                 }`}
               >
-              Cadastre-se
+                <span className="inline-block font-bold transition-transform transform group-hover:scale-110">
+                  Cadastre-se
+                </span>
               </a>
             </p>
           </div>
