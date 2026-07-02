@@ -98,7 +98,6 @@ export default function RecuperarSenha() {
 
       if (event.key === "1") irParaConteudo();
       if (event.key === "2") irParaMenu();
-      if (event.key === "3") toggleContrast();
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -163,12 +162,16 @@ export default function RecuperarSenha() {
               : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
           }`}
         >
-          <strong
-            className={`w-6 h-6 rounded flex items-center justify-center text-sm font-bold
-            ${highContrast ? "bg-white text-black" : "bg-[#fac16d] text-black"}`}
+          <div
+            className={`w-6 h-6 rounded flex items-center justify-center
+            ${highContrast ? "bg-white" : "bg-[#fac16d]"}`} // Mesma cor de fundo condicional dos números
           >
-            3
-          </strong>
+            <img
+              src={highContrast ? "/altocontraste2.png" : "/altocontraste1.png"}
+              alt=""
+              className="w-5 h-5 object-contain" // Tamanho ajustado para caber
+            />
+          </div>
           <span className="text-sm font-medium">
             {highContrast ? "Desativar Alto Contraste" : "Ativar Alto Contraste"}
           </span>
