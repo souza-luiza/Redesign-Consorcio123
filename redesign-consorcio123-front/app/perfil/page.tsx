@@ -114,8 +114,10 @@ export default function Perfil() {
     const [rua, setRua] = useState("");
     const [numero, setNumero] = useState("");
     const [complemento, setComplemento] = useState("");
-
     const [errors, setErrors] = useState<Record<string, string>>({});
+    
+    // NOVO: Estado para a mensagem de sucesso de alteração
+    const [perfilSucesso, setPerfilSucesso] = useState(false);
 
 
     const tituloVisualizarRef = useRef<HTMLTableCaptionElement>(null);
@@ -206,9 +208,7 @@ export default function Perfil() {
 
     // ── Navegação rápida (barra de acessibilidade) ────────────────────────────
     const irParaConteudo = () => {
-        const el =
-            document.getElementById("titulo-aba") ??
-            document.getElementById("main-content");
+        const el = document.getElementById("titulo-aba") ?? document.getElementById("main-content");
         if (el) {
             el.scrollIntoView({ behavior: "smooth", block: "start" });
             el.focus();
@@ -307,7 +307,9 @@ export default function Perfil() {
 
     const handleAlterarDados = (e: React.FormEvent) => {
         e.preventDefault();
+        setPerfilSucesso(false); // Reseta caso já tenha sido acionado antes
         const erros = validarPerfil();
+        
         if (Object.keys(erros).length > 0) {
             setErrors(erros);
             focarPrimeiroCampoComErro(erros);
@@ -324,6 +326,10 @@ export default function Perfil() {
             celular,
             endereco: { cep, bairro, rua, numero, complemento },
         };
+        
+        // Ativação do aviso de sucesso após passar pelas validações
+        setPerfilSucesso(true);
+        setTimeout(() => setPerfilSucesso(false), 5000); // Remove aviso após 5 segundos
     };
 
     // ── Validações de abertura de processo ──────────────────────────────────
@@ -358,7 +364,6 @@ export default function Perfil() {
             frequenciaSemanal,
             arquivo: arquivo?.name,
         };
-
         setProcessoSucesso(true);
         setTipoInstituicao("");
         setUnidadeEnsino("");
@@ -441,27 +446,27 @@ export default function Perfil() {
             </button>
 
             <button
-            onClick={toggleContrast}
-            className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
-            ${
-                highContrast
-                ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
-                : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
-            }`}
+                onClick={toggleContrast}
+                className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
+                ${
+                    highContrast
+                    ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
+                    : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
+                }`}
             >
-            <div
-                className={`w-6 h-6 rounded flex items-center justify-center
-                ${highContrast ? "bg-white" : "bg-[#fac16d]"}`} // Mesma cor de fundo condicional dos números
-            >
-                <img
-                src={highContrast ? "/altocontraste2.png" : "/altocontraste1.png"}
-                alt=""
-                className="w-5 h-5 object-contain" // Tamanho ajustado para caber
-                />
-            </div>
-            <span className="text-sm font-medium">
-                {highContrast ? "Desativar Alto Contraste" : "Ativar Alto Contraste"}
-            </span>
+                <div
+                    className={`w-6 h-6 rounded flex items-center justify-center
+                    ${highContrast ? "bg-white" : "bg-[#fac16d]"}`} // Mesma cor de fundo condicional dos números
+                >
+                    <img
+                        src={highContrast ? "/altocontraste2.png" : "/altocontraste1.png"}
+                        alt=""
+                        className="w-5 h-5 object-contain" // Tamanho ajustado para caber
+                    />
+                </div>
+                <span className="text-sm font-medium">
+                    {highContrast ? "Desativar Alto Contraste" : "Ativar Alto Contraste"}
+                </span>
             </button>
         </nav>
 
@@ -495,8 +500,8 @@ export default function Perfil() {
                                     ? "border-b-[3px] border-[#fac16d] focus:border-dashed focus:border-white"
                                     : "border-b-[3px] border-[#100b4f] focus:border-dashed"
                                 : highContrast
-                                ? "border-b border-white focus:border-b-[3px] focus:border-dashed"
-                                : "border-b border-black focus:border-b-[3px] focus:border-dashed"
+                                    ? "border-b border-white focus:border-b-[3px] focus:border-dashed"
+                                    : "border-b border-black focus:border-b-[3px] focus:border-dashed"
                             }`}
                         >
                             <span
@@ -507,8 +512,8 @@ export default function Perfil() {
                                         ? "text-[#fac16d] font-bold"
                                         : "text-[#100b4f] font-bold"
                                     : highContrast
-                                    ? "text-white font-normal"
-                                    : "text-black font-normal"
+                                        ? "text-white font-normal"
+                                        : "text-black font-normal"
                                 }`}
                             >
                                 {aba.label}
@@ -641,8 +646,7 @@ export default function Perfil() {
                                         className="mt-1 w-5 h-5 focus:outline-none focus:ring-2 focus:ring-[#f69c0a]"
                                     />
                                     <span>
-                                        Confirmo que minha unidade de ensino está a 1 Km ou mais
-                                        da minha residência
+                                        Confirmo que minha unidade de ensino está a 1 Km ou mais da minha residência
                                     </span>
                                 </label>
                                 <ErrorMsg mensagem={processoErrors.confirmaDistancia} />
@@ -656,12 +660,11 @@ export default function Perfil() {
                                             fileInputRef.current?.click();
                                         }
                                     }}
-                                    className={`mt-2 h-28 rounded-2xl flex flex-row justify-center items-center gap-2 cursor-pointer text-center px-4
-                                    focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#f69c0a]
+                                    className={`mt-2 h-28 rounded-2xl flex flex-row justify-center items-center gap-2 cursor-pointer text-center px-4 focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#f69c0a]
                                     ${
-                                    highContrast
-                                        ? "bg-white text-black border border-white"
-                                        : "bg-white text-[#100b4f]"
+                                        highContrast
+                                            ? "bg-white text-black border border-white"
+                                            : "bg-white text-[#100b4f]"
                                     }
                                     ${processoErrors.arquivo ? "border-2 border-red-400" : ""}`}
                                 >
@@ -673,9 +676,7 @@ export default function Perfil() {
                                         className={`rounded-2xl p-2 ${highContrast ? "bg-black" : "bg-[#100b4f]"}`}
                                     />
                                     <span className="text-sm font-medium">
-                                        {arquivo
-                                            ? arquivo.name
-                                            : "Clique ou arraste seu comprovante de matrícula, em PDF, até aqui."}
+                                        {arquivo ? arquivo.name : "Clique ou arraste seu comprovante de matrícula, em PDF, até aqui."}
                                     </span>
                                     <input
                                         ref={fileInputRef}
@@ -691,13 +692,12 @@ export default function Perfil() {
 
                             <button
                                 type="submit"
-                                className={`self-center mt-2 px-6 py-3 rounded-[10px] cursor-pointer
-                                    text-lg font-medium transition-colors outline-none
-                                    ${
-                                    highContrast
-                                        ? "border-2 border-white text-white hover:bg-[#f69c0a] hover:border-none hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-none"
-                                        : "bg-[#fac16d] text-black hover:bg-[#f69c0a] focus:bg-[#f69c0a] focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#f69c0a]"
-                                    }`}
+                                className={`self-center mt-2 px-6 py-3 rounded-[10px] cursor-pointer text-lg font-medium transition-colors outline-none
+                                ${
+                                highContrast
+                                    ? "border-2 border-white text-white hover:bg-[#f69c0a] hover:border-none hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-none"
+                                    : "bg-[#fac16d] text-black hover:bg-[#f69c0a] focus:bg-[#f69c0a] focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#f69c0a]"
+                                }`}
                             >
                                 Abrir novo processo
                             </button>
@@ -788,25 +788,20 @@ export default function Perfil() {
                             className="self-stretch flex flex-col justify-center items-center gap-3"
                         >
                             <p
-                                className={`text-center text-base font-normal font-['Space_Grotesk']
-                                ${highContrast ? "text-white" : "text-black"}`}
+                                className={`text-center text-base font-normal font-['Space_Grotesk'] ${highContrast ? "text-white" : "text-black"}`}
                             >
-                                Nenhum processo encontrado.
-                                <br />
-                                Clique no botão abaixo para criar um processo para
-                                solicitar seu passe estudantil.
+                                Nenhum processo encontrado. <br /> Clique no botão abaixo para criar um processo para solicitar seu passe estudantil.
                             </p>
                             <button
                                 type="button"
                                 onClick={() => setAbaAtiva("abrir")}
                                 className={`h-12 px-5 py-2.5 rounded-[10px] flex justify-center items-center gap-2.5 cursor-pointer
-                                    text-2xl font-normal font-['Space_Grotesk'] transition-colors outline-none
-                                    focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#f69c0a]
-                                    ${
-                                    highContrast
-                                        ? "outline outline-2 outline-offset-[-2px] outline-white text-white hover:bg-white hover:text-black"
-                                        : "outline outline-2 outline-offset-[-2px] outline-black text-black hover:bg-black hover:text-white"
-                                    }`}
+                                text-2xl font-normal font-['Space_Grotesk'] transition-colors outline-none focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#f69c0a]
+                                ${
+                                highContrast
+                                    ? "outline outline-2 outline-offset-[-2px] outline-white text-white hover:bg-white hover:text-black"
+                                    : "outline outline-2 outline-offset-[-2px] outline-black text-black hover:bg-black hover:text-white"
+                                }`}
                             >
                                 Crie um novo processo
                             </button>
@@ -825,8 +820,7 @@ export default function Perfil() {
                         id="titulo-aba"
                         
                         tabIndex={-1}
-                        className={`text-2xl font-medium font-['Space_Grotesk'] focus:outline-none
-                        ${highContrast ? "text-white" : "text-black"}`}
+                        className={`text-2xl font-medium font-['Space_Grotesk'] focus:outline-none ${highContrast ? "text-white" : "text-black"}`}
                     >
                         {tituloAba.editar}
                     </h1>
@@ -895,14 +889,11 @@ export default function Perfil() {
 
                             <fieldset className="flex flex-col gap-2">
                                 <legend
-                                    className={`text-lg font-medium mb-2 ${highContrast ? "text-white" : "text-black"}`}
+                                    className={`text-lg font-medium mb-1 ${highContrast ? "text-white" : "text-black"}`}
                                 >
                                     Data de nascimento
                                 </legend>
-
-                                <fieldset className="grid grid-cols-3 gap-3 border-0 p-0 m-0">
-                                    <legend className="sr-only">Dia, mês e ano</legend>
-
+                                <div className="grid grid-cols-3 gap-4">
                                     <p className="flex flex-col gap-1">
                                         <select
                                             id="dia"
@@ -962,7 +953,7 @@ export default function Perfil() {
                                         </select>
                                         <ErrorMsg mensagem={errors.ano} />
                                     </p>
-                                </fieldset>
+                                </div>
                             </fieldset>
 
                             <p className="flex flex-col gap-2">
@@ -1008,15 +999,8 @@ export default function Perfil() {
                             </p>
                         </fieldset>
 
-                        <h2
-                            className={`text-2xl font-medium font-['Space_Grotesk']
-                            ${highContrast ? "text-white" : "text-black"}`}
-                        >
-                            Edite suas informações de endereço
-                        </h2>
-
-                        <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <legend className="sr-only">Endereço</legend>
+                        <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-5">
+                            <legend className="sr-only">Informações de endereço</legend>
 
                             <p className="flex flex-col gap-2">
                                 <label
@@ -1032,7 +1016,7 @@ export default function Perfil() {
                                     onChange={(e) => setCep(formatarCEP(e.target.value))}
                                     placeholder="00000-000"
                                     maxLength={9}
-                                    className={inputBase("cep", errors, `${highContrast ? "" : "border border-zinc-300"}`)}
+                                    className={inputBase("cep", errors, highContrast ? "" : "border border-zinc-300")}
                                 />
                                 <ErrorMsg mensagem={errors.cep} />
                             </p>
@@ -1073,8 +1057,8 @@ export default function Perfil() {
                                 <ErrorMsg mensagem={errors.rua} />
                             </p>
 
-                            <fieldset className="grid grid-cols-[120px_1fr] gap-6 border-0 p-0 m-0">
-                                <legend className="sr-only">Número e complemento</legend>
+                            <fieldset className="grid grid-cols-[120px_1fr] gap-6">
+                                <legend className="sr-only">Número e Complemento</legend>
 
                                 <p className="flex flex-col gap-2">
                                     <label
@@ -1099,7 +1083,8 @@ export default function Perfil() {
                                         htmlFor="complemento"
                                         className={`text-lg font-medium ${highContrast ? "text-white" : "text-black"}`}
                                     >
-                                        Complemento <span className="font-light">(Opcional)</span>
+                                        Complemento
+                                        <span className="font-light">(Opcional)</span>
                                     </label>
                                     <input
                                         id="complemento"
@@ -1114,6 +1099,16 @@ export default function Perfil() {
                         </fieldset>
 
                         <p className="self-stretch pt-2.5 pb-5 flex flex-col justify-center items-center gap-2.5">
+                            {/* NOVO: Feedback visual e acessível de sucesso */}
+                            {perfilSucesso && (
+                                <span 
+                                    role="status" 
+                                    aria-live="polite" 
+                                    className={`text-center font-bold text-lg mb-2 ${highContrast ? "text-[#fac16d]" : "text-green-700"}`}
+                                >
+                                    Dados da conta alterados com sucesso!
+                                </span>
+                            )}
                             <button
                                 type="submit"
                                 className={`h-12 px-5 py-2.5 rounded-[10px] flex justify-center items-center gap-2.5
