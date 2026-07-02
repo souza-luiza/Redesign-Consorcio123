@@ -117,6 +117,30 @@ export default function Perfil() {
 
     const [errors, setErrors] = useState<Record<string, string>>({});
 
+
+    const tituloVisualizarRef = useRef<HTMLTableCaptionElement>(null);
+    const primeiroCampoAbrirRef = useRef<HTMLSelectElement>(null);
+    const primeiroCampoEditarRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        // Evita rodar na primeira renderização se não for necessário
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+
+        // Direciona o foco dependendo de qual aba foi aberta
+        if (abaAtiva === "abrir" && primeiroCampoAbrirRef.current) {
+            primeiroCampoAbrirRef.current.focus();
+        } 
+        else if (abaAtiva === "visualizar" && tituloVisualizarRef.current) {
+            tituloVisualizarRef.current.focus();
+        } 
+        else if (abaAtiva === "editar" && primeiroCampoEditarRef.current) {
+            primeiroCampoEditarRef.current.focus();
+        }
+    }, [abaAtiva]);
+
     // Preenche o formulário quando a session chega
     useEffect(() => {
         if (!session) return;
@@ -250,16 +274,29 @@ export default function Perfil() {
         return erros;
     };
 
-    const focarPrimeiroCampoComErro = (erros: Record<string, string>) => {
-        const ordem = [
-            "nome", "cpf", "rg", "dia", "mes", "ano",
-            "genero", "celular", "cep", "bairro", "rua", "numero",
-        ];
+    const ORDEM_CAMPOS_PERFIL = [
+        "nome", "cpf", "rg", "dia", "mes", "ano",
+        "genero", "celular", "cep", "bairro", "rua", "numero",
+    ];
+
+    const ORDEM_CAMPOS_PROCESSO = [
+        "tipoInstituicao", "unidadeEnsino", "turno", "curso",
+        "frequenciaSemanal", "confirmaDistancia", "arquivo",
+    ];
+
+    const focarPrimeiroCampoComErro = (
+        erros: Record<string, string>,
+        ordem: string[] = ORDEM_CAMPOS_PERFIL
+    ) => {
         for (const campo of ordem) {
             if (erros[campo]) {
+                // Caso especial: o input de arquivo é sr-only (tabIndex -1),
+                // quem recebe o foco de fato é o label que o envolve.
                 const el =
-                    (document.getElementById(campo) as HTMLElement) ||
-                    (document.querySelector(`[name="${campo}"]`) as HTMLElement);
+                    campo === "arquivo"
+                        ? (document.querySelector('label[for="arquivo"]') as HTMLElement)
+                        : (document.getElementById(campo) as HTMLElement) ||
+                          (document.querySelector(`[name="${campo}"]`) as HTMLElement);
                 if (el) {
                     el.scrollIntoView({ behavior: "smooth", block: "center" });
                     el.focus();
@@ -309,6 +346,7 @@ export default function Perfil() {
         if (Object.keys(erros).length > 0) {
             setProcessoErrors(erros);
             setProcessoSucesso(false);
+            focarPrimeiroCampoComErro(erros, ORDEM_CAMPOS_PROCESSO);
             return;
         }
         setProcessoErrors({});
@@ -489,6 +527,7 @@ export default function Perfil() {
                     >
                         <h1
                             id="titulo-aba"
+                            
                             tabIndex={-1}
                             className="self-stretch text-center text-2xl font-medium text-white font-['Space_Grotesk'] focus:outline-none"
                         >
@@ -501,6 +540,7 @@ export default function Perfil() {
                                     Tipo de Instituição
                                 </label>
                                 <select
+                                    ref={primeiroCampoAbrirRef}
                                     id="tipoInstituicao"
                                     value={tipoInstituicao}
                                     onChange={(e) => setTipoInstituicao(e.target.value)}
@@ -583,9 +623,10 @@ export default function Perfil() {
                             <fieldset className="flex flex-col gap-2">
                                 <legend className="sr-only">Confirmação de distância e comprovante</legend>
 
-                                <label className="flex items-start gap-3 text-white text-sm">
+                                <label htmlFor="confirmaDistancia" className="flex items-start gap-3 text-white text-sm">
                                     <input
                                         type="checkbox"
+                                        id="confirmaDistancia"
                                         checked={confirmaDistancia}
                                         onChange={(e) => setConfirmaDistancia(e.target.checked)}
                                         onKeyDown={(e) => {
@@ -670,7 +711,6 @@ export default function Perfil() {
                 >
                     <h1
                         id="titulo-aba"
-                        tabIndex={-1}
                         className={`self-stretch text-center text-2xl font-medium font-['Space_Grotesk'] focus:outline-none
                         ${highContrast ? "text-white" : "text-black"}`}
                     >
@@ -678,69 +718,67 @@ export default function Perfil() {
                     </h1>
 
                     {session && session.processos.length > 0 ? (
-                        <figure className="w-full overflow-x-auto">
-                            <table className="w-full text-left border-collapse">
-                                <caption className="sr-only">
-                                    Lista dos processos de passe estudantil solicitados
-                                </caption>
-                                <thead>
-                                    <tr
-                                        className={`border-b ${
-                                            highContrast ? "border-white" : "border-zinc-300"
-                                        }`}
-                                    >
-                                        {["Unidade de Ensino", "Curso", "Turno", "Frequência semanal", "Status"].map(
-                                            (coluna) => (
-                                                <th
-                                                    key={coluna}
-                                                    scope="col"
-                                                    className={`py-3 px-4 text-base font-medium font-['Space_Grotesk']
-                                                    ${highContrast ? "text-white" : "text-black"}`}
-                                                >
-                                                    {coluna}
-                                                </th>
-                                            )
-                                        )}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {session.processos.map((processo, index) => {
-                                        const concluido = processo.status === "Concluído";
-                                        const linhaDestacada = highContrast
-                                            ? concluido
-                                                ? "bg-[#fac16d] text-black"
-                                                : index % 2 === 0
-                                                ? "bg-[#2b2b2b] text-white"
-                                                : "bg-transparent text-white"
-                                            : concluido
+                        <table className="w-full text-left border-collapse">
+                            <caption ref={tituloVisualizarRef} tabIndex={-1} className="sr-only">
+                                Lista dos processos de passe estudantil solicitados
+                            </caption>
+                            <thead>
+                                <tr
+                                    className={`border-b ${
+                                        highContrast ? "border-white" : "border-zinc-300"
+                                    }`}
+                                >
+                                    {["Unidade de Ensino", "Curso", "Turno", "Frequência semanal", "Status"].map(
+                                        (coluna) => (
+                                            <th
+                                                key={coluna}
+                                                scope="col"
+                                                className={`py-3 px-4 text-base font-medium font-['Space_Grotesk']
+                                                ${highContrast ? "text-white" : "text-black"}`}
+                                            >
+                                                {coluna}
+                                            </th>
+                                        )
+                                    )}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {session.processos.map((processo, index) => {
+                                    const concluido = processo.status === "Concluído";
+                                    const linhaDestacada = highContrast
+                                        ? concluido
                                             ? "bg-[#fac16d] text-black"
                                             : index % 2 === 0
-                                            ? "bg-zinc-100 text-black"
-                                            : "bg-transparent text-black";
+                                            ? "bg-[#2b2b2b] text-white"
+                                            : "bg-transparent text-white"
+                                        : concluido
+                                        ? "bg-[#fac16d] text-black"
+                                        : index % 2 === 0
+                                        ? "bg-zinc-100 text-black"
+                                        : "bg-transparent text-black";
 
-                                        return (
-                                            <tr key={processo.id} className={linhaDestacada}>
-                                                <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
-                                                    {processo.unidadeEnsino}
-                                                </td>
-                                                <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
-                                                    {processo.curso}
-                                                </td>
-                                                <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
-                                                    {processo.turno}
-                                                </td>
-                                                <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
-                                                    {processo.frequenciaSemanal}
-                                                </td>
-                                                <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
-                                                    {processo.status}
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-                        </figure>
+                                    return (
+                                        <tr key={processo.id} className={linhaDestacada}>
+                                            <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
+                                                {processo.unidadeEnsino}
+                                            </td>
+                                            <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
+                                                {processo.curso}
+                                            </td>
+                                            <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
+                                                {processo.turno}
+                                            </td>
+                                            <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
+                                                {processo.frequenciaSemanal}
+                                            </td>
+                                            <td className="py-3 px-4 text-sm font-['Space_Grotesk']">
+                                                {processo.status}
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
                     ) : (
                         <section
                             aria-label="Nenhum processo encontrado"
@@ -782,6 +820,7 @@ export default function Perfil() {
                 >
                     <h1
                         id="titulo-aba"
+                        
                         tabIndex={-1}
                         className={`text-2xl font-medium font-['Space_Grotesk'] focus:outline-none
                         ${highContrast ? "text-white" : "text-black"}`}
@@ -801,6 +840,7 @@ export default function Perfil() {
                                     Nome completo
                                 </label>
                                 <input
+                                    ref={primeiroCampoEditarRef}
                                     id="nome"
                                     name="nome"
                                     type="text"

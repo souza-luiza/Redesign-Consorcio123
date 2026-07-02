@@ -581,7 +581,7 @@ export default function Cadastro() {
                         text-lg font-medium transition-colors outline-none
                         ${
                         highContrast
-                            ? "bg-white text-black hover:bg-[#f69c0a] focus:bg-[#f69c0a]"
+                            ? "border-white border-2 bg-black text-white hover:outline-none hover:border-none hover:text-black hover:bg-[#f69c0a] focus:bg-[#f69c0a]"
                             : "bg-[#fac16d] text-black hover:bg-[#f69c0a] focus:bg-[#f69c0a]"
                         }`}
                     >
@@ -696,37 +696,38 @@ export default function Cadastro() {
 
                     {/* Termo de Adesão */}
                     <fieldset className="flex flex-col gap-3">
-                    <legend className="text-white text-lg font-medium">
-                        Termo de Adesão e Responsabilidade
-                    </legend>
-                    <p className="text-white text-sm leading-relaxed">
-                        Reconheço que o cartão de estudante é de uso exclusivo do titular.
-                        <br />
-                        Não é possível emprestá-lo, vendê-lo ou transferi-lo para terceiros.
-                        <br />
-                        Estou ciente de que:
-                        <br />
-                        Na primeira infração, o benefício será suspenso por 5 dias.
-                        <br />
-                        Em caso de reincidência, a suspensão será de 30 dias.
-                    </p>
+                        <legend className="text-white text-lg font-medium">
+                            Termo de Adesão e Responsabilidade
+                        </legend>
+                        <label htmlFor="checkout-aceite-termos" className="text-white text-sm leading-relaxed">
+                            Reconheço que o cartão de estudante é de uso exclusivo do titular.
+                            <br />
+                            Não é possível emprestá-lo, vendê-lo ou transferi-lo para terceiros.
+                            <br />
+                            Estou ciente de que:
+                            <br />
+                            Na primeira infração, o benefício será suspenso por 5 dias.
+                            <br />
+                            Em caso de reincidência, a suspensão será de 30 dias.
+                        </label>
 
-                    <label className="flex items-start gap-3 text-white">
-                        <input
-                        type="checkbox"
-                        checked={aceiteTermos}
-                        onChange={(e) => setAceiteTermos(e.target.checked)}
-                        onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                            e.preventDefault();
-                            setAceiteTermos((prev) => !prev);
-                            }
-                        }}
-                        className="mt-1 w-5 h-5 focus:outline-none focus:ring-2 focus:ring-[#f69c0a]"
-                        />
-                        <span>Li e concordo com o Termo de Adesão e Responsabilidade.</span>
-                    </label>
-                    <ErrorMsg mensagem={errors.aceiteTermos} />
+                        <label className="flex items-start gap-3 text-white">
+                            <input
+                            type="checkbox"
+                            id="checkout-aceite-termos"
+                            checked={aceiteTermos}
+                            onChange={(e) => setAceiteTermos(e.target.checked)}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                e.preventDefault();
+                                setAceiteTermos((prev) => !prev);
+                                }
+                            }}
+                            className="mt-1 w-5 h-5 focus:outline-none focus:ring-2 focus:ring-[#f69c0a]"
+                            />
+                            <span>Li e concordo com o Termo de Adesão e Responsabilidade.</span>
+                        </label>
+                        <ErrorMsg mensagem={errors.aceiteTermos} />
                     </fieldset>
 
                     {/* Botões */}

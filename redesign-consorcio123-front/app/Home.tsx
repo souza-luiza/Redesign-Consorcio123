@@ -131,9 +131,10 @@ export default function CadastroForms() {
         className={`w-full min-h-screen flex flex-col justify-start items-center overflow-x-hidden font-['Space_Grotesk']
         ${highContrast ? "bg-[#212121]" : "bg-white"}`}
       >
-        <section className="w-full flex-1 max-w-[1200px] px-8 py-20 flex justify-between items-center gap-12">
-          <article className="w-full max-w-md flex flex-col items-start gap-8">
+        <div className="w-full flex-1 max-w-[1200px] px-8 py-20 flex justify-between items-center gap-12">
+          <section aria-labelledby="main-title main-description" className="w-full max-w-md flex flex-col items-start gap-8">
             <h1
+              id="main-title"
               className={`text-[40px] leading-tight font-medium
               ${highContrast ? "text-white" : "text-black"}`}
             >
@@ -141,6 +142,7 @@ export default function CadastroForms() {
             </h1>
 
             <p
+              id="main-description"
               className={`text-lg font-normal
               ${highContrast ? "text-white" : "text-black"}`}
             >
@@ -162,7 +164,7 @@ export default function CadastroForms() {
                 Criar conta
               </button>
 
-                <button
+              <button
                   onClick={() => (window.location.href = "login")}
                   className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
                   ${
@@ -174,7 +176,7 @@ export default function CadastroForms() {
                 Acessar conta
               </button>
             </nav>
-          </article>
+          </section>
 
           <figure className="flex-1 flex justify-center items-center">
             <Image
@@ -184,12 +186,12 @@ export default function CadastroForms() {
                   : "/estudante-home.png"
               }
               alt="Ilustração de um estudante sentado em uma pilha de livros mexendo no notebook"
-              width={500}
-              height={300}
-              className="w-full max-w-[500px] h-auto object-contain"
+              width={350}
+              height={200}
+              className="object-contain"
             />
           </figure>
-        </section>
+        </div>
 
         <section className="w-full max-w-[1200px] px-8 pb-24 grid grid-cols-1 md:grid-cols-4 gap-8">
           {[
@@ -197,13 +199,13 @@ export default function CadastroForms() {
               img: "/card-home.png",
               imgContrast: "/card-home-contraste.svg",
               title: "1. Faça o seu cadastro",
-              text: "Crie sua conta com CPF e dados escolares.",
+              text: "Crie sua conta com seus dados pessoais.",
             },
             {
               img: "/documento-home.png",
               imgContrast: "/documento-home-contraste.svg",
               title: "2. Envie os documentos",
-              text: "Anexe RG, comprovante e declaração escolar.",
+              text: "Coloque seus dados escolares e anexe a declaração escolar.",
             },
             {
               img: "/relogio-home.png",
@@ -227,12 +229,15 @@ export default function CadastroForms() {
                   : "bg-[#fac16d]"
               }`}
             >
-              <Image
-                src={highContrast ? card.imgContrast : card.img}
-                alt={card.title}
-                width={64}
-                height={64}
-              />
+              <figure className="w-16 h-16 flex justify-center items-center">
+                <Image
+                  src={highContrast ? card.imgContrast : card.img}
+                  alt={card.title}
+                  width={64}
+                  height={64}
+                  objectFit="contain"
+                />
+              </figure>
 
               <h3
                 className={`text-lg font-bold
