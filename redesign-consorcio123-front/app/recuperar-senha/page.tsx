@@ -99,7 +99,6 @@ export default function RecuperarSenha() {
 
       if (event.key === "1") irParaConteudo();
       if (event.key === "2") irParaMenu();
-      if (event.key === "3") toggleContrast();
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -121,7 +120,7 @@ export default function RecuperarSenha() {
       >
         <button
           onClick={irParaConteudo}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -139,7 +138,7 @@ export default function RecuperarSenha() {
 
         <button
           onClick={irParaMenu}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -157,19 +156,23 @@ export default function RecuperarSenha() {
 
         <button
           onClick={toggleContrast}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
               : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
           }`}
         >
-          <strong
-            className={`w-6 h-6 rounded flex items-center justify-center text-sm font-bold
-            ${highContrast ? "bg-white text-black" : "bg-[#fac16d] text-black"}`}
+          <div
+            className={`w-6 h-6 rounded flex items-center justify-center
+            ${highContrast ? "bg-white" : "bg-[#fac16d]"}`} // Mesma cor de fundo condicional dos números
           >
-            3
-          </strong>
+            <img
+              src={highContrast ? "/altocontraste2.png" : "/altocontraste1.png"}
+              alt=""
+              className="w-5 h-5 object-contain" // Tamanho ajustado para caber
+            />
+          </div>
           <span className="text-sm font-medium">
             {highContrast ? "Desativar Alto Contraste" : "Ativar Alto Contraste"}
           </span>
@@ -282,9 +285,9 @@ export default function RecuperarSenha() {
 
                 </div>
                 
-                <button type="submit" className={`px-10 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                <button type="submit" className={`px-10 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}>
                   Continuar
@@ -335,9 +338,9 @@ export default function RecuperarSenha() {
                 
                 <button 
                   type="button" 
-                  className={`mb-8 px-6 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                  className={`mb-8 px-6 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                     highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}
                     onClick={() => {setInfoMsg("Um novo código foi enviado para seu email."); setErrorMsg("");}}
@@ -349,17 +352,17 @@ export default function RecuperarSenha() {
                   <button 
                     type="button" 
                     onClick={() => {setCurrentStep(1); setErrorMsg(""); setInfoMsg("");}} 
-                    className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                    className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                            ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                            ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                             : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                         }`}
                   >
                     &larr; Voltar
                   </button>
-                  <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                  <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`} onClick={() => setInfoMsg("")}>
                     Continuar
@@ -397,7 +400,7 @@ export default function RecuperarSenha() {
                     <button 
                       type="button" 
                       onClick={() => setShowPassword(!showPassword)} 
-                      className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                      className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors cursor-pointer ${
                             highContrast
                             ? "text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
                             : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
@@ -437,7 +440,7 @@ export default function RecuperarSenha() {
                     <button 
                       type="button" 
                       onClick={() => setShowPassword(!showPassword)} 
-                      className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                      className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors cursor-pointer ${
                             highContrast
                             ? "text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
                             : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
@@ -451,16 +454,16 @@ export default function RecuperarSenha() {
                   <button 
                     type="button" 
                     onClick={() => {setCurrentStep(2); setErrorMsg("");}} 
-                    className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                    className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}>
                     &larr; Voltar
                   </button>
-                  <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+                  <button type="submit" className={`px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                         highContrast
-                        ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                        ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                         : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
                     }`}>
                     Confirmar

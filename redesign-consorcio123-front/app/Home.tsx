@@ -48,10 +48,6 @@ export default function CadastroForms() {
       if (event.key === "2") {
         irParaMenu();
       }
-
-      if (event.key === "3") {
-        toggleContrast();
-      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -69,7 +65,7 @@ export default function CadastroForms() {
       >
         <button
           onClick={irParaConteudo}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -87,7 +83,7 @@ export default function CadastroForms() {
 
         <button
           onClick={irParaMenu}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -105,19 +101,23 @@ export default function CadastroForms() {
 
         <button
           onClick={toggleContrast}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
               : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
           }`}
         >
-          <strong
-            className={`w-6 h-6 rounded flex items-center justify-center text-sm font-bold
-            ${highContrast ? "bg-white text-black" : "bg-[#fac16d] text-black"}`}
+          <div
+            className={`w-6 h-6 rounded flex items-center justify-center
+            ${highContrast ? "bg-white" : "bg-[#fac16d]"}`} // Mesma cor de fundo condicional dos números
           >
-            3
-          </strong>
+            <img
+              src={highContrast ? "/altocontraste2.png" : "/altocontraste1.png"}
+              alt=""
+              className="w-5 h-5 object-contain" // Tamanho ajustado para caber
+            />
+          </div>
           <span className="text-sm font-medium">
             {highContrast ? "Desativar Alto Contraste" : "Ativar Alto Contraste"}
           </span>
@@ -131,9 +131,10 @@ export default function CadastroForms() {
         className={`w-full min-h-screen flex flex-col justify-start items-center overflow-x-hidden font-['Space_Grotesk']
         ${highContrast ? "bg-[#212121]" : "bg-white"}`}
       >
-        <section className="w-full flex-1 max-w-[1200px] px-8 py-20 flex justify-between items-center gap-12">
-          <article className="w-full max-w-md flex flex-col items-start gap-8">
+        <div className="w-full flex-1 max-w-[1200px] px-8 py-20 flex justify-between items-center gap-12">
+          <section aria-labelledby="main-title main-description" className="w-full max-w-md flex flex-col items-start gap-8">
             <h1
+              id="main-title"
               className={`text-[40px] leading-tight font-medium
               ${highContrast ? "text-white" : "text-black"}`}
             >
@@ -141,6 +142,7 @@ export default function CadastroForms() {
             </h1>
 
             <p
+              id="main-description"
               className={`text-lg font-normal
               ${highContrast ? "text-white" : "text-black"}`}
             >
@@ -152,29 +154,29 @@ export default function CadastroForms() {
               <button
                 id="menu"
                 onClick={() => (window.location.href = "cadastro")}
-                className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
+                className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors cursor-pointer
                 ${
                   highContrast
-                    ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:outline-none focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
+                    ? "border text-white hover:bg-[#f69c0a] hover:text-black focus:outline-none focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
                     : "bg-[#fac16d] text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
                 }`}
               >
                 Criar conta
               </button>
 
-                <button
+              <button
                   onClick={() => (window.location.href = "login")}
-                  className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors
+                  className={`px-6 py-3 rounded-lg text-xl font-medium transition-colors cursor-pointer
                   ${
                     highContrast
-                      ? "border border-white text-white hover:bg-[#f69c0a] hover:text-black focus:outline-none focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
+                      ? "border text-white hover:bg-[#f69c0a] hover:text-black focus:outline-none focus:bg-[#f69c0a] focus:border-[#f69c0a] focus:text-black"
                       : "bg-[#fac16d] text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
                 }`}
               >
                 Acessar conta
               </button>
             </nav>
-          </article>
+          </section>
 
           <figure className="flex-1 flex justify-center items-center">
             <Image
@@ -184,12 +186,12 @@ export default function CadastroForms() {
                   : "/estudante-home.png"
               }
               alt="Ilustração de um estudante sentado em uma pilha de livros mexendo no notebook"
-              width={500}
-              height={300}
-              className="w-full max-w-[500px] h-auto object-contain"
+              width={350}
+              height={200}
+              className="object-contain"
             />
           </figure>
-        </section>
+        </div>
 
         <section className="w-full max-w-[1200px] px-8 pb-24 grid grid-cols-1 md:grid-cols-4 gap-8">
           {[
@@ -197,13 +199,13 @@ export default function CadastroForms() {
               img: "/card-home.png",
               imgContrast: "/card-home-contraste.svg",
               title: "1. Faça o seu cadastro",
-              text: "Crie sua conta com CPF e dados escolares.",
+              text: "Crie sua conta com seus dados pessoais.",
             },
             {
               img: "/documento-home.png",
               imgContrast: "/documento-home-contraste.svg",
               title: "2. Envie os documentos",
-              text: "Anexe RG, comprovante e declaração escolar.",
+              text: "Coloque seus dados escolares e anexe a declaração escolar.",
             },
             {
               img: "/relogio-home.png",
@@ -220,19 +222,22 @@ export default function CadastroForms() {
           ].map((card) => (
             <article
               key={card.title}
-              className={`p-6 rounded-[10px] flex flex-col justify-start items-center text-center gap-4
+              className={`p-6 rounded-[10px] flex flex-col justify-start items-center text-center gap-4 cursor-pointer
               ${
                 highContrast
                   ? "bg-black border border-white"
                   : "bg-[#fac16d]"
               }`}
             >
-              <Image
-                src={highContrast ? card.imgContrast : card.img}
-                alt={card.title}
-                width={64}
-                height={64}
-              />
+              <figure className="w-16 h-16 flex justify-center items-center">
+                <Image
+                  src={highContrast ? card.imgContrast : card.img}
+                  alt={card.title}
+                  width={64}
+                  height={64}
+                  objectFit="contain"
+                />
+              </figure>
 
               <h3
                 className={`text-lg font-bold

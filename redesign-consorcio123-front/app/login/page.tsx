@@ -85,9 +85,13 @@ export default function Login() {
 
         if (estaDigitando) return;
 
-        if (event.key === "1") irParaConteudo();
-        if (event.key === "2") irParaMenu();
-        if (event.key === "3") toggleContrast();
+        if (event.key === "1") {
+          irParaConteudo();
+        }
+
+        if (event.key === "2") {
+          irParaMenu();
+        }
         };
 
         window.addEventListener("keydown", handleKeyDown);
@@ -102,7 +106,7 @@ export default function Login() {
       >
         <button
           onClick={irParaConteudo}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -120,7 +124,7 @@ export default function Login() {
 
         <button
           onClick={irParaMenu}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
@@ -138,19 +142,23 @@ export default function Login() {
 
         <button
           onClick={toggleContrast}
-          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors
+          className={`flex justify-start items-center gap-2.5 px-2 py-1 rounded-md transition-colors cursor-pointer
           ${
             highContrast
               ? "text-white hover:bg-white hover:text-black focus:outline-dashed focus:outline-2 focus:outline-offset-4 focus:outline-[#fac16d]"
               : "text-black hover:bg-[#100b4f] hover:text-white focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-[#100b4f] focus:bg-[#100b4f] focus:text-white"
           }`}
         >
-          <strong
-            className={`w-6 h-6 rounded flex items-center justify-center text-sm font-bold
-            ${highContrast ? "bg-white text-black" : "bg-[#fac16d] text-black"}`}
+          <div
+            className={`w-6 h-6 rounded flex items-center justify-center
+            ${highContrast ? "bg-white" : "bg-[#fac16d]"}`} // Mesma cor de fundo condicional dos números
           >
-            3
-          </strong>
+            <img
+              src={highContrast ? "/altocontraste2.png" : "/altocontraste1.png"}
+              alt=""
+              className="w-5 h-5 object-contain" // Tamanho ajustado para caber
+            />
+          </div>
           <span className="text-sm font-medium">
             {highContrast ? "Desativar Alto Contraste" : "Ativar Alto Contraste"}
           </span>
@@ -165,11 +173,12 @@ export default function Login() {
         className="flex-grow flex items-center justify-center py-12 px-4 outline-none"
       >
         <section
+          aria-labelledby="main-titulo"
           className={`w-full max-w-[440px] p-10 rounded-xl flex flex-col gap-8 shadow-sm ${
             highContrast ? "bg-[#0a0a0a]" : "bg-[#100b4f]"
           }`}
         >
-          <h1 className="text-white text-center text-xl font-medium">
+          <h1 id="main-titulo" className="text-white text-center text-xl font-medium">
             Acessar sua conta
           </h1>
 
@@ -228,7 +237,7 @@ export default function Login() {
                   aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                   aria-pressed={showPassword}
                   onClick={() => setShowPassword(!showPassword)}
-                  className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors ${
+                  className={`absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 transition-colors cursor-pointer ${
                     highContrast
                       ? "text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
                       : "text-gray-600 hover:text-black focus:outline-dashed focus:outline-2 focus:outline-[#100b4f]"
@@ -241,9 +250,9 @@ export default function Login() {
 
             <button
               type="submit"
-              className={`mt-2 mx-auto px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all ${
+              className={`mt-2 mx-auto px-8 py-2.5 rounded-md font-medium text-sm outline-none transition-all cursor-pointer ${
                 highContrast
-                  ? "bg-transparent text-white border border-white hover:bg-white hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#fac16d]"
+                  ? "bg-transparent text-white border hover:bg-[#f69c0a] hover:text-black focus:bg-[#f69c0a] focus:text-black focus:border-[#f69c0a]"
                   : "bg-[#fac16d] text-black border border-transparent hover:bg-[#f69c0a] focus:ring-4 focus:ring-[#e65100]"
               }`}
             >
@@ -254,26 +263,30 @@ export default function Login() {
           <div className="flex flex-col items-center gap-6 mt-2">
             <a
               href="/recuperar-senha"
-              className={`inline-block text-white font-bold text-xs outline-none rounded p-1 transition-all transform hover:scale-110 ${
+              className={`group inline-block outline-none rounded cursor-pointer ${
                 highContrast
-                  ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-4"
-                  : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-4"
+                  ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-2"
+                  : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-2"
               }`}
             >
-              Esqueceu a senha?
+              <span className="inline-block text-white font-bold text-xs transition-transform transform group-hover:scale-110">
+                Esqueceu a senha?
+              </span>
             </a>
 
             <p className="text-white text-xs">
               Não tem uma conta?{" "}
               <a
                 href="/cadastro"
-                className={`inline-block font-bold outline-none rounded p-1 transition-all transform hover:scale-110 ${
+                className={`group inline-block outline-none rounded cursor-pointer px-1 ${
                   highContrast
-                    ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-4"
-                    : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-4"
+                    ? "focus:outline-dashed focus:outline-2 focus:outline-[#fac16d] focus:outline-offset-2"
+                    : "focus:outline-dashed focus:outline-2 focus:outline-white focus:outline-offset-2"
                 }`}
               >
-              Cadastre-se
+                <span className="inline-block font-bold transition-transform transform group-hover:scale-110 px-1">
+                  Cadastre-se
+                </span>
               </a>
             </p>
           </div>
