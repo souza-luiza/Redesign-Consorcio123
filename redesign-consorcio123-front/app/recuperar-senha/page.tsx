@@ -184,7 +184,12 @@ export default function RecuperarSenha() {
         className="flex-1 flex flex-col items-center justify-center p-6 focus:outline-none"
       >
         {/* Stepper / Indicador de Progresso */}
-        <div className="flex items-start justify-center gap-2 mb-10 w-full max-w-lg mx-auto">
+        <span className="sr-only" aria-live="polite" aria-atomic="true">
+          {currentStep === 1 && "Passo 1 de 3: Identificação."}
+          {currentStep === 2 && "Passo 2 de 3: Envio do código de recuperação."}
+          {currentStep === 3 && "Passo 3 de 3: Redefinição de senha."}
+        </span>
+        <div className="flex items-start justify-center gap-2 mb-10 w-full max-w-lg mx-auto" aria-hidden="true">
           {/* Step 1 */}
           <div className="flex flex-col items-center w-28">
             <div className={`w-6 h-6 rounded-full flex items-center justify-center z-10 
