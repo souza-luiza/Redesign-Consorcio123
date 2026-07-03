@@ -367,7 +367,7 @@ export default function Cadastro() {
             ${highContrast ? "bg-[#212121]" : "bg-white"}`}
         >
             <section
-                aria-labelledby="titulo-cadastro"
+                aria-labelledby="titulo-cadastro meaviso"
                 className={`w-full max-w-[650px] p-12 rounded-[10px] flex flex-col gap-6
                 ${highContrast ? "bg-black border border-white" : "bg-[#100b4f]"}`}
             >
@@ -378,6 +378,7 @@ export default function Cadastro() {
                             <h1 id="titulo-cadastro" className="text-white text-3xl font-medium">
                                 Criar sua conta
                             </h1>
+                            <p id="meaviso" className="text-white text-base">Todos os campos são obrigatórios</p>
                             <p className="text-white text-base">Dados pessoais</p>
                             <div aria-hidden="true" className="flex items-center gap-2">
                                 <div className="w-5 h-2 bg-[#fac16d] rounded-full" />
