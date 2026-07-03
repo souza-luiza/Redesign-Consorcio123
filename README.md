@@ -10,4 +10,4 @@ Link para o protótipo de Alta Fidelidade: https://redesign-consorcio123-fork.ve
 
 Link para o relatório de avaliação heurística: https://drive.google.com/file/d/15EVVvWT88RkclJ12xVCLYrFdkXZysVuL/view?usp=sharing
 
-Link para apresentação final do projeto: https://drive.google.com/file/d/1bxNcyu2egNiOYyG42t1y4Eo-Qy4Iga-S/view?usp=sharing
+Link para apresentação final do projeto: https://drive.google.com/file/d/10Vk1lIyK-JcAp4S6SggTBR9CuPmzyr8W/view?usp=sharing
