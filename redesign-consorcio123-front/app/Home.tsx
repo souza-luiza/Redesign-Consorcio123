@@ -228,7 +228,7 @@ export default function CadastroForms() {
           ].map((card) => (
             <article
               key={card.title}
-              className={`p-6 rounded-[10px] flex flex-col justify-start items-center text-center gap-4 cursor-pointer
+              className={`p-6 rounded-[10px] flex flex-col justify-start items-center text-center gap-4
               ${
                 highContrast
                   ? "bg-black border border-white"
