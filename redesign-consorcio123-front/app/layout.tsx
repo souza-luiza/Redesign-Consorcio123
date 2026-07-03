@@ -29,18 +29,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <Script id="high-contrast-bootstrap" strategy="beforeInteractive">
-          {`(() => {
-            try {
-              const value = window.localStorage.getItem('consorcio123-high-contrast');
-              if (value !== null) {
-                document.documentElement.dataset.highContrast = value;
-              }
-            } catch (error) {}
-          })();`}
-        </Script>
-      </head>
       <body className="min-h-full flex flex-col">
           {children}
       </body>
