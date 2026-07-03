@@ -9,3 +9,5 @@ Link para Figma do Projeto: https://www.figma.com/design/RJXmYucgdXLDKJbRzJ36ST/
 Link para o protótipo de Alta Fidelidade: https://redesign-consorcio123-fork.vercel.app/
 
 Link para o relatório de avaliação heurística: https://drive.google.com/file/d/15EVVvWT88RkclJ12xVCLYrFdkXZysVuL/view?usp=sharing
+
+Link para apresentação final do projeto: https://drive.google.com/file/d/1bxNcyu2egNiOYyG42t1y4Eo-Qy4Iga-S/view?usp=sharing
