@@ -289,7 +289,7 @@ export default function Cadastro() {
                 : highContrast
                 ? "border border-white"
                 : "",
-            highContrast ? "bg-black text-white" : "bg-white text-black",
+            highContrast ? "bg-white text-black" : "bg-white text-black",
             extra,
         ].join(" ");
 
