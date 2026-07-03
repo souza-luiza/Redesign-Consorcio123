@@ -9,6 +9,8 @@ import Header from "@/components/Header";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [highContrast, setHighContrast] = useState(() => {
+    if (typeof window === "undefined") return false;
+
     return localStorage.getItem("alto-contraste") === "true";
   });
 

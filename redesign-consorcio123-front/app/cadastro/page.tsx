@@ -18,6 +18,8 @@ export default function Cadastro() {
     const [etapa, setEtapa] = useState(1);
     const isFirstRender = useRef(true);
     const [highContrast, setHighContrast] = useState(() => {
+        if (typeof window === "undefined") return false;
+
         return localStorage.getItem("alto-contraste") === "true";
     });
 

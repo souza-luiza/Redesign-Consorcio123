@@ -8,6 +8,8 @@ import Image from "next/image";
 export default function CadastroForms() {
 
   const [highContrast, setHighContrast] = useState(() => {
+    if (typeof window === "undefined") return false;
+    
     return localStorage.getItem("alto-contraste") === "true";
   });
 

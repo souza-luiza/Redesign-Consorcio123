@@ -92,6 +92,8 @@ export default function Perfil() {
     const [abaAtiva, setAbaAtiva] = useState<Aba>("abrir");
     const isFirstRender = useRef(true);
     const [highContrast, setHighContrast] = useState(() => {
+        if (typeof window === "undefined") return false;
+
         return localStorage.getItem("alto-contraste") === "true";
     });
 
